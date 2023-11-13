@@ -1,0 +1,36 @@
+spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: 'TRUE'
+    hibernate:
+      ddl-auto: update
+    open-in-view: 'false'
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: 'true'
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    password: 'zaiche15'
+    username: root
+    url: jdbc:mysql://localhost:3306/kid_ventures?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
+
+kidVentures:
+  default.admin.pass: ${DEFAULT_ADMIN_PASS:111111}
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor: TRACE
+        SQL: DEBUG
+      nodeValue: WARN
+    blog: WARN
+server:
+  port: 8080

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns="http://www.w3.org/1999/html">
+<head th:replace="~{fragments/head}">
+</head>
+
+<body>
+<div>
+    <nav th:replace="~{fragments/navbar}"></nav>
+</div>
+
+<div class="container">
+    <h2 class="text-center text-white">Детайли</h2>
+
+    <form th:object="${place}" class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
+
+        <div class="form-group">
+            <h1 th:text="${place.name}"></h1>
+
+            <img th:src="${place.pictureUrl}" alt="Снимка">
+            <br>
+            <br>
+            <p th:text="${place.city + ', ' + place.address}"></p>
+            <br>
+            <p th:text="${place.description}"></p>
+            <br>
+
+            <p th:text="${place.category}"></p>
+        </div>
+
+
+    </form>
+
+    <div class="button-holder button-delete d-flex text-center"> <form th:method="delete"
+                th:action="@{/place/{id}(id=*{id})}">
+        <input type="submit" value="Изтрий" class="btn btn-info btn-lg justify-content-center"/>
+    </form>
+    </div>
+
+</div>
+
+
+</div>
+</div>
+</body>
+
+<div class="footer"><h6>&copy; 2023 - Ани Петкова - Всички права запазени.</h6></div>
+
+</html>
