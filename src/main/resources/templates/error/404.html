@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/head}">
+</head>
+
+<body>
+<div>
+    <nav th:replace="~{fragments/navbar}"></nav>
+</div>
+
+
+<section class="boxes about_container">
+    <div class=" about">
+
+
+
+        <div class="dog">
+            <h5 class="text-center text-white mt-5">Oпа! Това, което търсите вече не е тук!</h5>
+            <h5 class="text-center text-white mt-5">Съжаляваме за причиненото неудобство!</h5>
+            <img class="dog-img" src="/images/dog.jpg" height="150px" alt="Broken dog">
+            <br/>
+            <a class="a-class" th:href="@{/}">Моля, върнете се обратно...</a>
+        </div>
+    </div>
+
+</section>
+
+</body>
+
+<div class="footer"><h6>&copy; 2023 - Ани Петкова - Всички права запазени.</h6></div>
+
+</html>

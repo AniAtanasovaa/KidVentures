@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="~{fragments/head}">
+</head>
+
+<body>
+<div>
+    <nav th:replace="~{fragments/navbar}"></nav>
+</div>
+
+<!-- Top Container -->
+<section class="top-container">
+    <div class="showcase">
+        <h1>Намерете прекрасни места и забавления за деца!</h1>
+        <br>
+
+        <a href="/places" class="fun"><h2>Към забавленията</h2></a>
+        <br>
+
+    </div>
+
+</section>
+
+<!-- Boxes Section -->
+<section class="boxes">
+    <a href="/" class="main-btn" >
+        <div class="box">
+            <h3>На закрито</h3>
+            <img src="/images/ball-start.jpg" height="50px" alt="">
+
+        </div>
+    </a>
+    <a href="/" class="main-btn" >
+        <div class="box">
+            <h3>На открито</h3>
+            <img src="/images/bear.jpg" height="50px" alt="">
+
+        </div>
+    </a>
+    <a href="/" class="main-btn" >
+        <div class="box">
+            <h3>С животни</h3>
+            <img src="/images/zaek.jpg" height="50px" alt="">
+
+        </div>
+    </a>
+</section>
+
+</div>
+
+<div class="footer">
+    <br>
+    <h6>&copy; 2023 - Ани Петкова - Всички права запазени.</h6>
+</div>
+
+</body>
+</html>

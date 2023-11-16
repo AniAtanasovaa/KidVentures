@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/head}">
+</head>
+
+<body>
+<div>
+    <nav th:replace="~{fragments/navbar}"></nav>
+</div>
+
+<div class="container">
+
+    <h2 class="text-center text-white">Добавете място:</h2>
+    <form th:action="@{/place/add}"
+          th:method="post"
+          th:object="${createPlaceBindingModel}"
+
+          class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
+
+        <div class="row">
+
+            <div class="form-group col-md-6 mb-3">
+                <label for="name" class="text-white font-weight-bold">Име на мястото</label>
+                <input th:field="*{name}" th:errorclass="is-invalid"
+                       id="name"
+                       name="name"
+                       type="text"
+                       class="form-control"
+                       placeholder="Име"/>
+                <p class="invalid-feedback errors alert alert-danger">
+                    Името е задължително и трябва да съдържа между 2 и 20 символа.
+            </div>
+
+            <div class="form-group col-md-6 mb-3">
+                <label for="city" class="text-white font-weight-bold">Град</label>
+                <input th:field="*{city}" th:errorclass="is-invalid"
+                       id="city"
+                       name="city"
+                       type="text"
+                       class="form-control"
+                       placeholder="Град"/>
+                <p class="invalid-feedback errors alert alert-danger">
+                    Градът е задължителен и трябва да съдържа между 2 и 20 символа.
+            </div>
+
+            <div class="form-group col-md-6 mb-3">
+                <label for="address" class="text-white font-weight-bold">Адрес</label>
+                <input th:field="*{address}" th:errorclass="is-invalid"
+                       id="address"
+                       name="address"
+                       type="text"
+                       class="form-control"
+                       placeholder="Адрес"/>
+                <p class="invalid-feedback errors alert alert-danger">
+                    Адресът е задължителен и трябва да съдържа между 2 и 20 символа.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="row">
+
+            <div class="form-group col-md-6 mb-3">
+                <label for="description" class="text-white font-weight-bold">Описание на мястото</label>
+                <textarea th:field="*{description}" th:errorclass="is-invalid"
+                       id="description"
+                       name="description"
+                       type="text"
+                       class="form-control"
+                       placeholder="Описание"></textarea>
+                <p class="invalid-feedback errors alert alert-danger">
+                    Моля, опишете мястото.
+                </p>
+            </div>
+
+            <div class="form-group col-md-6 mb-3">
+                <label for="category" class="text-white font-weight-bold">Категория</label>
+                <select th:field="*{category}"
+                         id="category"
+                        name="category"
+                        th:errorclass="is-invalid">
+                    <option value="" selected>Изберете категория</option>
+                    <option th:each="category : ${T(defence.app.model.enums.CategoryEnum).values()}"
+                            th:text="${category}"
+                            th:value="${category}"
+                            th:selected="${category} == *{category}">
+                          >Изберете категория</option>
+                </select>
+
+                <p class="invalid-feedback errors alert alert-danger">
+                    Моля, изберете категория.
+                </p>
+            </div>
+
+            <div class="form-group col-md-6 mb-3">
+            <label for="picture" class="text-white font-weight-bold">Качи URL на снимката:</label>
+                <input th:field="*{pictureUrl}" th:errorclass="is-invalid"
+                       id="picture"
+                       name="picture"
+                       type="text"
+                       class="form-control"
+                       placeholder="URL на снимката"/>
+                <p class="invalid-feedback errors alert alert-danger">
+                    Моля, въведете URL на снимката.
+                </p>
+
+        </div>
+
+
+        <div class="row">
+
+            <div class="col col-md-4">
+
+                <div class="button-holder d-flex">
+                    <input type="submit" class="btn btn-info btn-lg" value="Добави мястото" />
+                </div>
+            </div>
+        </div>
+
+        </div>
+
+    </form>
+</div>
+
+
+
+</body>
+
+
+<div class="footer"><h6>&copy; 2023 - Ани Петкова - Всички права запазени.</h6></div>
+
+
+</html>

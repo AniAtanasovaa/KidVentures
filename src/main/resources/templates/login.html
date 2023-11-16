@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/head}">
+</head>
+
+<body>
+<div>
+    <nav th:replace="~{fragments/navbar}"></nav>
+</div>
+
+<div class="container">
+    <h2 class="text-center text-white">Вход</h2>
+
+    <form th:method="post"
+          th:action="@{/login}"
+          class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
+        <div class="form-group">
+            <label for="username" class="text-white font-weight-bold">Потребителско име</label>
+            <input id="username"
+                   name="username"
+                   th:value="${username}"
+                   type="text"
+                   class="form-control"
+                   placeholder="Потребителско име"/>
+        </div>
+        <div class="form-group">
+            <label for="password" class="text-white font-weight-bold">Парола</label>
+            <input id="password"
+                   name="password"
+                   type="password" min="2"
+                   max="20" class="form-control"
+                   placeholder="Парола"/>
+
+        </div>
+
+        <p th:if="${bad_credentials}" class="errors alert alert-danger">
+            Невалидно потребителско име или парола.
+        </p>
+
+        <div class="row">
+            <div class="col col-md-4">
+                <div class="button-holder d-flex">
+                    <input type="submit" class="btn btn-info btn-lg" value="Вход"/>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="footer"><h6>&copy; 2023 - Ани Петкова - Всички права запазени.</h6></div>
+
+</body>
+</html>
+
+
+
+
