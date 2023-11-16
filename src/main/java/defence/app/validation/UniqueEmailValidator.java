@@ -1,4 +1,4 @@
-package defence.app.model.validation;
+package defence.app.validation;
 
 import defence.app.repository.UserRepository;
 import jakarta.validation.ConstraintValidator;

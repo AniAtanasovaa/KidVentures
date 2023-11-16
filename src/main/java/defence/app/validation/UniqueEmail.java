@@ -1,4 +1,4 @@
-package defence.app.model.validation;
+package defence.app.validation;
 
 
 import jakarta.validation.Constraint;
