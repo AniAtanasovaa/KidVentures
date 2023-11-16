@@ -2,10 +2,12 @@ package defence.app.model.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 
+import java.util.List;
 import java.util.Set;
-
+//Todo да оправя да дава съобщение при използван email ??? или вече имам?
 @Entity
 @Table(name = "users")
 public class UserEntity extends BaseEntity{
@@ -23,7 +25,7 @@ public class UserEntity extends BaseEntity{
     private String email;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private Set<RoleEntity> roles = new HashSet<>();
+    private List<RoleEntity> roles = new ArrayList<>();
 
     public UserEntity() {
     }
@@ -73,11 +75,11 @@ public class UserEntity extends BaseEntity{
         return this;
     }
 
-    public Set<RoleEntity> getRoles() {
+    public List<RoleEntity> getRoles() {
         return roles;
     }
 
-    public UserEntity setRoles(Set<RoleEntity> roles) {
+    public UserEntity setRoles(List<RoleEntity> roles) {
         this.roles = roles;
         return this;
     }

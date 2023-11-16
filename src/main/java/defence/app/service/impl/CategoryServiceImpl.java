@@ -2,7 +2,7 @@ package defence.app.service.impl;
 
 import defence.app.model.entity.CategoryEntity;
 import defence.app.model.enums.CategoryEnum;
-import defence.app.repositories.CategoryRepository;
+import defence.app.repository.CategoryRepository;
 import defence.app.service.CategoryService;
 import org.springframework.stereotype.Service;
 

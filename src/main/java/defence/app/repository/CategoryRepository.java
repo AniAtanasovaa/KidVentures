@@ -1,4 +1,4 @@
-package defence.app.repositories;
+package defence.app.repository;
 
 import defence.app.model.entity.CategoryEntity;
 import defence.app.model.enums.CategoryEnum;

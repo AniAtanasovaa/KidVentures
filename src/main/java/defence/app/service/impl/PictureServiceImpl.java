@@ -1,7 +1,7 @@
 package defence.app.service.impl;
 
 import defence.app.model.entity.PictureEntity;
-import defence.app.repositories.PictureRepository;
+import defence.app.repository.PictureRepository;
 import defence.app.service.PictureService;
 import org.springframework.stereotype.Service;
 

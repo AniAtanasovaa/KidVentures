@@ -1,7 +1,7 @@
 package defence.app.web;
 import defence.app.model.entity.UserEntity;
 import defence.app.model.bindingModel.UserLoginBindingModel;
-import defence.app.repositories.UserRepository;
+import defence.app.repository.UserRepository;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;

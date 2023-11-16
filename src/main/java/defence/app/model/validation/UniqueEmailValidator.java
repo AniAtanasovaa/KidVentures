@@ -1,6 +1,6 @@
 package defence.app.model.validation;
 
-import defence.app.repositories.UserRepository;
+import defence.app.repository.UserRepository;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
@@ -15,7 +15,7 @@ public class UniqueEmailValidator implements ConstraintValidator <UniqueEmail, S
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
         return userRepository
-                .findByUsername(value)
+                .findByEmail(value)
                 .isEmpty();
     }
 }

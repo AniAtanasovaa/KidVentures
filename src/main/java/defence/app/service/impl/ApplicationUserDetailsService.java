@@ -2,7 +2,7 @@ package defence.app.service.impl;
 
 import defence.app.model.entity.RoleEntity;
 import defence.app.model.entity.UserEntity;
-import defence.app.repositories.UserRepository;
+import defence.app.repository.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;

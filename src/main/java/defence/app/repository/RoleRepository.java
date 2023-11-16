@@ -1,4 +1,4 @@
-package defence.app.repositories;
+package defence.app.repository;
 
 import defence.app.model.entity.RoleEntity;
 import defence.app.model.enums.RoleEnum;

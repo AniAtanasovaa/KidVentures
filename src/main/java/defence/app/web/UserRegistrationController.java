@@ -56,7 +56,5 @@ public class UserRegistrationController {
 
         return "redirect:/login";
    }
- //При него е само с USerRegisterDTO
-    //https://github.com/luchob/softuni-sep-2023/blob/main/mobilele/src/main/java/org/softuni/mobilele/web/UserRegistrationController.java
 
 }

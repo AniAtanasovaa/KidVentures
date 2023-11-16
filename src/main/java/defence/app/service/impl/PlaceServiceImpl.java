@@ -1,7 +1,6 @@
 package defence.app.service.impl;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.userdetails.User;
 
 import defence.app.model.entity.CategoryEntity;
 
@@ -10,7 +9,7 @@ import defence.app.model.entity.PlaceEntity;
 import defence.app.model.entity.UserEntity;
 import defence.app.model.serviceModel.PlaceServiceModel;
 import defence.app.model.viewModel.PlaceViewModel;
-import defence.app.repositories.PlaceRepository;
+import defence.app.repository.PlaceRepository;
 import defence.app.service.CategoryService;
 import defence.app.service.PictureService;
 import defence.app.service.PlaceService;
@@ -19,8 +18,6 @@ import defence.app.service.UserService;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

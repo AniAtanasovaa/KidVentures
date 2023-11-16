@@ -6,12 +6,12 @@ import defence.app.model.entity.UserEntity;
 import defence.app.model.enums.RoleEnum;
 import defence.app.model.serviceModel.UserServiceModel;
 
-import defence.app.repositories.RoleRepository;
-import defence.app.repositories.UserRepository;
+import defence.app.repository.RoleRepository;
+import defence.app.repository.UserRepository;
 import defence.app.service.UserService;
 
-import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -27,13 +27,16 @@ public class UserServiceImpl implements UserService {
     private final RoleRepository roleRepository;
     private final ModelMapper modelMapper;
 
+    private final ApplicationEventPublisher applicationEventPublisher;
 
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, RoleRepository roleRepository, ModelMapper modelMapper) {
+
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, RoleRepository roleRepository, ModelMapper modelMapper, ApplicationEventPublisher applicationEventPublisher) {
 
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.roleRepository = roleRepository;
         this.modelMapper = modelMapper;
+        this.applicationEventPublisher = applicationEventPublisher;
     }
 
     @Override
@@ -64,6 +67,8 @@ public class UserServiceImpl implements UserService {
     public void registerUser(UserServiceModel userServiceModel) {
 
         userRepository.save(map(userServiceModel));
+
+
 
     }
 
@@ -151,10 +156,6 @@ public class UserServiceImpl implements UserService {
 
                 .orElse(null);
     }
-
-
-//ToDo да сложа картинка отляво на пътя
-    //Todo ErrorHandling от остава 1.32 мин
 
 
     @Override

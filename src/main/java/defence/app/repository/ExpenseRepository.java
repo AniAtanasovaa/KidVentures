@@ -1,4 +1,4 @@
-package defence.app.repositories;
+package defence.app.repository;
 
 import defence.app.model.entity.ExpenseEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

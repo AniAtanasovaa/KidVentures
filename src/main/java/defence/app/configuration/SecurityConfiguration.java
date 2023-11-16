@@ -1,6 +1,6 @@
 package defence.app.configuration;
 import defence.app.model.enums.RoleEnum;
-import defence.app.repositories.UserRepository;
+import defence.app.repository.UserRepository;
 import defence.app.service.impl.ApplicationUserDetailsService;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -61,7 +61,7 @@ public class SecurityConfiguration {
 
     @Bean
     public UserDetailsService userDetailsService(UserRepository userRepository) {
-        //// This service translates the mobilele users and roles
+        //// This service translates the users and roles
         //    // to representation which spring security understands.
         return new ApplicationUserDetailsService(userRepository);
     }
