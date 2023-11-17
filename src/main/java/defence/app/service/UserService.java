@@ -1,6 +1,7 @@
 package defence.app.service;
 
 import defence.app.model.entity.UserEntity;
+import defence.app.model.enums.RoleEnum;
 import defence.app.model.serviceModel.UserServiceModel;
 
 import java.util.Optional;
@@ -9,7 +10,10 @@ public interface UserService {
 
     void initRoles();
 
+    void changeUserRole(String username, RoleEnum newRole);
 
+
+   Optional<UserEntity> getCurrentUser();
 
     void registerUser(UserServiceModel userServiceModel);
 

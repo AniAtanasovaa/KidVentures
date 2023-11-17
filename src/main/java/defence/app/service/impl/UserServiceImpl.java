@@ -10,8 +10,11 @@ import defence.app.repository.RoleRepository;
 import defence.app.repository.UserRepository;
 import defence.app.service.UserService;
 
+import defence.app.service.exception.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -59,6 +62,52 @@ public class UserServiceImpl implements UserService {
             roleRepository.save(roleEntity);
 
         });
+    }
+
+    @Override
+    public void changeUserRole(String username, RoleEnum newRole) {
+        Optional<UserEntity> userOptional = userRepository.findByUsername(username);
+
+        if (userOptional.isPresent()) {
+            UserEntity user = userOptional.get();
+
+            // Премахвам текущата роля
+            user.getRoles().clear();
+
+            // Добавям новата роля
+            Optional<RoleEntity> role = roleRepository.findByRole(newRole);
+            RoleEntity newRoleEntity = role.orElseGet(() -> {
+                RoleEntity roleEntity = new RoleEntity(newRole);
+                return roleRepository.save(roleEntity);
+            });
+
+            user.getRoles().add(newRoleEntity);
+
+            // Запазваме ъпдейта на потребителя
+            userRepository.save(user);
+        } else {
+            throw new ObjectNotFoundException("User not found with username: " + username);
+        }
+
+    }
+
+    @Override
+    public Optional<UserEntity> getCurrentUser() {
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (principal instanceof UserDetails) {
+
+            UserDetails userDetails = (UserDetails) principal;
+            // Предполагаме, че има поле username в UserDetails, което съдържа потребителското име
+            String username = userDetails.getUsername();
+
+            // Връщаме информацията за текущия потребител от базата данни или друго хранилище
+            return userRepository.findByUsername(username);
+        }
+
+        // Ако не успеем да вземем потребител, връщаме null или хвърляме изключение
+        return null;
     }
 
 

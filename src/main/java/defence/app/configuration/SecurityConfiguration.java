@@ -30,6 +30,7 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.GET, "/places/**").permitAll()
                         .requestMatchers("/error").permitAll()
                        .requestMatchers("/account").hasRole(RoleEnum.ADMIN.name())
+                       .requestMatchers("/change").hasRole(RoleEnum.ADMIN.name())
                         // all other requests are authenticated.
                         .anyRequest().authenticated()
         ).formLogin(
@@ -72,5 +73,4 @@ public class SecurityConfiguration {
     }
 
 
-    //Todo custom validator for UserName + email
 }

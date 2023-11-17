@@ -26,4 +26,5 @@ public class ApplicationBeanConfiguration {
                 .build();
     }
 
+
 }

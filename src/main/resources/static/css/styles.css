@@ -115,11 +115,19 @@ body {
 
 }
 
+.about h3 {
+    padding: 10px;
+}
+
 .about_text, .a-class{
     font-size:  1.05rem;
     color:rgb(5, 28, 15);
    font-weight: bolder;
     /*font-weight: bold;*/
+}
+
+.change {
+    margin-top: 50px;
 }
 
 .bg-text {

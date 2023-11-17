@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.server.ServerErrorException;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.nio.file.AccessDeniedException;
+
 @ControllerAdvice // try-catch за всичките контролери
 public class GlobalErrorHandlingController {
 
@@ -26,6 +28,15 @@ public class GlobalErrorHandlingController {
     public ModelAndView handleServerError(ServerErrorException serverErrorException) {
 
         ModelAndView modelAndView = new ModelAndView("error/500");
+
+        return modelAndView;
+    }
+
+    @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
+    @ExceptionHandler(AccessDeniedException.class)
+    public ModelAndView handleAccessDeniedError(AccessDeniedException accessDeniedException) {
+
+        ModelAndView modelAndView = new ModelAndView("error/access-denied");
 
         return modelAndView;
     }
