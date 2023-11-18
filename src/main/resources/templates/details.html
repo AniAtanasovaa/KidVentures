@@ -32,12 +32,16 @@
 
     </form>
 
+    <li class="nav-item"sec:authorize="hasRole('ADMIN')">
+
     <div class="button-holder button-delete d-flex text-center">
         <form th:method="delete"
                 th:action="@{/place/{id}(id=*{id})}">
         <input type="submit" value="Изтрий" class="btn btn-info btn-lg justify-content-center"/>
     </form>
     </div>
+
+    </li>
 
 </div>
 

@@ -43,45 +43,6 @@ public class PlaceServiceImpl implements PlaceService {
         this.categoryService = categoryService;
     }
 
-//    @Transactional
-//    @Override
-//    public Long addPlace(PlaceServiceModel placeServiceModel) {
-//
-//        PlaceEntity placeEntity = new PlaceEntity();
-//
-////        pictureEntity.setUrl(placeServiceModel.getPicture());
-////
-////        placeEntity.setPicture(pictureEntity);
-////
-////        pictureEntity.setTitle(placeEntity.getPicture().getTitle());
-////        pictureEntity.setAuthor(placeEntity.getAuthor());
-////        pictureEntity.setPlace(placeEntity);
-////
-////        pictureService.savePicture(pictureEntity);
-//
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//
-//        System.out.println(authentication.getPrincipal());
-//        System.out.println(authentication.isAuthenticated());
-//        System.out.println(authentication.getAuthorities());
-//
-//        if (authentication != null && authentication.getPrincipal() instanceof UserEntity) {
-//
-//            UserEntity loggedInUser = userService.findFirstByUsername (((UserEntity) authentication.getPrincipal()).getUsername());
-//
-//            placeEntity.setAuthor(loggedInUser);
-//        }
-//        placeEntity = modelMapper.map(placeServiceModel, PlaceEntity.class);
-//
-//            CategoryEntity category = categoryService.findCategoryByName(placeServiceModel.getCategory());
-//
-//            placeEntity.setCategory(category);
-//
-//            placeRepository.save(placeEntity);
-//
-//
-//            return placeEntity.getId();
-//        }
 
     @Transactional
     @Override
@@ -103,7 +64,7 @@ public class PlaceServiceImpl implements PlaceService {
 
     @Override
     @Transactional
-    public void deletePlace(Long id) {
+    public void deletePlace(Long id) { //Todo да се трие само от АДМИНИСТРАТОР
 
         placeRepository.deleteById(id);
 
