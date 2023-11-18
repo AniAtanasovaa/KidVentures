@@ -32,16 +32,21 @@
 
     </form>
 
-    <li class="nav-item"sec:authorize="hasRole('ADMIN')">
+    <span class="nav-item text-center" sec:authorize="hasRole('ADMIN')">
 
-    <div class="button-holder button-delete d-flex text-center">
-        <form th:method="delete"
-                th:action="@{/place/{id}(id=*{id})}">
-        <input type="submit" value="Изтрий" class="btn btn-info btn-lg justify-content-center"/>
-    </form>
+        <div class="button-delete ">
+            <form th:method="delete"
+                  th:action="@{/place/{id}(id=*{id})}">
+                <input type="submit" value="Изтрий" class="btn btn-info btn-lg justify-content-center"/>
+            </form>
+        </div>
+
+    </span>
+
+    <div class="text-center">
+        <br>
+        <a href="/" class="fun-about"><h2>Заповядайте в основното меню...</h2></a>
     </div>
-
-    </li>
 
 </div>
 

@@ -91,4 +91,4 @@ public class PlaceEntity extends BaseEntity {
     }
 
 
-} //Todo да сложа дата за публикувано на
+}

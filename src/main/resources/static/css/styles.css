@@ -135,6 +135,13 @@ body {
     margin-top: 50px;
 }
 
+.button-delete {
+    padding-top: 2%;
+    /*padding-left: 35%;*/
+    display: flex;
+    justify-content: center;
+}
+
 .bg-text {
     background-color: rgb(0, 0, 0); /* Fallback color */
     background-color: rgba(0, 0, 0, 0.4); /* Black w/opacity/see-through */

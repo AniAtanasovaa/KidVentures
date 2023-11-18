@@ -43,7 +43,6 @@ public class PlaceServiceImpl implements PlaceService {
         this.categoryService = categoryService;
     }
 
-
     @Transactional
     @Override
     public Long addPlace(PlaceServiceModel placeServiceModel, String username) {
@@ -64,7 +63,7 @@ public class PlaceServiceImpl implements PlaceService {
 
     @Override
     @Transactional
-    public void deletePlace(Long id) { //Todo да се трие само от АДМИНИСТРАТОР
+    public void deletePlace(Long id) {
 
         placeRepository.deleteById(id);
 
@@ -102,7 +101,7 @@ public class PlaceServiceImpl implements PlaceService {
 
     @Override
     public Page<PlaceViewModel> getAllPlaces(Pageable pageable) {
-        return placeRepository.findAll(pageable).map(PlaceServiceImpl::mapToDetails); // Todo да си променя PalceDetails и да направя метод MapToDetails и даг оползвам тук аз да извличам по - малко информ
+        return placeRepository.findAll(pageable).map(PlaceServiceImpl::mapToDetails);
     }
 
     private static PlaceViewModel mapToDetails(PlaceEntity placeEntity) {
