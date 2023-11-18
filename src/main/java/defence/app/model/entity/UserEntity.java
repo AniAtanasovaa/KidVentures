@@ -2,6 +2,7 @@ package defence.app.model.entity;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -26,6 +27,9 @@ public class UserEntity extends BaseEntity{
 
     @ManyToMany(fetch = FetchType.EAGER)
     private List<RoleEntity> roles = new ArrayList<>();
+
+    @Column(name = "registration_date")
+    private LocalDate registrationDate;
 
     public UserEntity() {
     }
@@ -88,4 +92,12 @@ public class UserEntity extends BaseEntity{
         this.roles.add(role);
     }
 
+    public LocalDate getRegistrationDate() {
+        return registrationDate;
+    }
+
+    public UserEntity setRegistrationDate(LocalDate registrationDate) {
+        this.registrationDate = registrationDate;
+        return this;
+    }
 }

@@ -18,6 +18,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 
 import java.util.Optional;
@@ -64,6 +65,8 @@ public class UserServiceImpl implements UserService {
         });
     }
 
+
+
     @Override
     public void changeUserRole(String username, RoleEnum newRole) {
         Optional<UserEntity> userOptional = userRepository.findByUsername(username);
@@ -89,6 +92,11 @@ public class UserServiceImpl implements UserService {
             throw new ObjectNotFoundException("User not found with username: " + username);
         }
 
+    }
+
+    @Override
+    public long countUserRegistrationsForDate(LocalDate date) {
+        return  userRepository.countByRegistrationDate(date);
     }
 
     @Override
@@ -135,7 +143,7 @@ public class UserServiceImpl implements UserService {
         userEntity.setFirstName(userServiceModel.getFirstName())
                 .setLastName(userServiceModel.getLastName())
                 .setEmail(userServiceModel.getEmail())
-                .setUsername(userServiceModel.getUsername())
+                .setUsername(userServiceModel.getUsername()).setRegistrationDate(LocalDate.now())
                 .setPassword(passwordEncoder.encode(userServiceModel.getPassword()))
                 .getRoles().add(userRole);
 

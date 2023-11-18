@@ -126,6 +126,11 @@ body {
     /*font-weight: bold;*/
 }
 
+.fun-about {
+    font-weight: lighter;
+    color: #d0e3d5;
+}
+
 .change {
     margin-top: 50px;
 }
