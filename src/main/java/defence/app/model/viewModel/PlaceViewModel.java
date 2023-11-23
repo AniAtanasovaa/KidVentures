@@ -1,9 +1,6 @@
 package defence.app.model.viewModel;
-
 import defence.app.model.entity.CategoryEntity;
 import defence.app.model.entity.PictureEntity;
-import defence.app.model.entity.UserEntity;
-import defence.app.model.enums.CategoryEnum;
 
 public class PlaceViewModel { // todo този клас ще се използва за показване на съкратена информация за конкретното място, напр.а показване на списък с места в една кратка форма, където е важно да се покаже само основната информация
     Long id;
@@ -15,24 +12,25 @@ public class PlaceViewModel { // todo този клас ще се използв
 
     private String description;
 
-    private String pictureUrl;
+    private PictureEntity picture;
 
-    private CategoryEnum category;
+    private CategoryEntity category;
 
-    public PlaceViewModel(Long id, String name, PictureEntity picture, String address, String city, String description, CategoryEntity category) {
+    public PlaceViewModel(Long id, String city, String name, String address, String description, PictureEntity picture, CategoryEntity category) {
         this.id = id;
-        this.name = name;
-        this.pictureUrl = (picture != null) ? picture.getUrl() : null; // Използвайте URL от PictureEntity, ако е наличен
-        this.address = address;
         this.city = city;
+        this.name = name;
+        this.address = address;
         this.description = description;
-        this.category = (category != null) ? category.getName() : null; // Използвайте CategoryEnum от CategoryEntity, ако е наличен
+        this.picture = picture;
+        this.category = category;
     }
-    public CategoryEnum getCategory() {
+
+    public CategoryEntity getCategory() {
         return category;
     }
 
-    public PlaceViewModel setCategory(CategoryEnum category) {
+    public PlaceViewModel setCategory(CategoryEntity category) {
         this.category = category;
         return this;
     }
@@ -76,12 +74,12 @@ public class PlaceViewModel { // todo този клас ще се използв
         return this;
     }
 
-    public String getPictureUrl() {
-        return pictureUrl;
+    public PictureEntity getPicture() {
+        return picture;
     }
 
-    public PlaceViewModel setPictureUrl(String pictureUrl) {
-        this.pictureUrl = pictureUrl;
+    public PlaceViewModel setPicture(PictureEntity picture) {
+        this.picture = picture;
         return this;
     }
 
@@ -96,7 +94,7 @@ public class PlaceViewModel { // todo този клас ще се използв
 
 
     public String summary() {
-        return "Име на мястото: " + name + "\nКатегория: " + category + "\nГрад: " + city + "\nАдрес: " + address;
+        return "Име на мястото: " + name + "\nКатегория: " + category.getName().name() + "\nГрад: " + city + "\nАдрес: " + address;
     }
 }
 

@@ -1,5 +1,5 @@
 package defence.app.model.serviceModel;
-import defence.app.model.entity.PictureEntity;
+
 import defence.app.model.entity.UserEntity;
 import defence.app.model.enums.CategoryEnum;
 import jakarta.validation.constraints.NotBlank;
@@ -26,7 +26,7 @@ public class PlaceServiceModel {
 
     private UserEntity author;
 
-    private String imageUrl;
+    private String pictureUrl;
 
     public PlaceServiceModel() {
     }
@@ -96,12 +96,12 @@ public class PlaceServiceModel {
         return this;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getPictureUrl() {
+        return pictureUrl;
     }
 
-    public PlaceServiceModel setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public PlaceServiceModel setPictureUrl(String pictureUrl) {
+        this.pictureUrl = pictureUrl;
         return this;
     }
 }

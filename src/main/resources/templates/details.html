@@ -13,24 +13,23 @@
 <div class="container">
     <h2 class="text-center text-white">Детайли</h2>
 
-    <form th:object="${place}" class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
+    <div th:object="${place}" class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
 
-        <div class="form-group">
-            <h1 th:text="${place.name}"></h1>
-
-            <img th:src="${place.pictureUrl}" alt="Снимка">
-            <br>
-            <br>
-            <p th:text="${place.city + ', ' + place.address}"></p>
-            <br>
-            <p th:text="${place.description}"></p>
-            <br>
-
-            <p th:text="${place.category}"></p>
+        <div class="box">
+            <div th:text="*{summary()}" style="white-space: pre-line;"> </div>
         </div>
 
+        <div class="row">
+                <img th:src="@{*{picture}}" style="width:100%">
+            </div>
+        </div>
 
-    </form>
+<!--        <div class="container-img">-->
+<!--            <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>-->
+<!--            <img id="expandedImg" style="width:100%">-->
+<!--        </div>-->
+
+    </div>
 
     <span class="nav-item text-center" sec:authorize="hasRole('ADMIN')">
 

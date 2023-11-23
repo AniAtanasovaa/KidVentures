@@ -2,6 +2,8 @@ package defence.app.model.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "places")
 public class PlaceEntity extends BaseEntity {
@@ -18,13 +20,22 @@ public class PlaceEntity extends BaseEntity {
 
     @ManyToOne
     private UserEntity author;
-    @OneToOne(cascade = CascadeType.PERSIST, mappedBy = "place")
+    @OneToOne(mappedBy = "place",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private PictureEntity picture;
 
     @ManyToOne(cascade = CascadeType.MERGE) // при чочо е с енъма
     private CategoryEntity category;
 
-    public PlaceEntity() {
+    @OneToMany(mappedBy = "place")
+    private List<CommentEntity> comments;
+
+    public PictureEntity getPicture() {
+        return picture;
+    }
+
+    public PlaceEntity setPicture(PictureEntity picture) {
+        this.picture = picture;
+        return this;
     }
 
     public String getCity() {
@@ -72,12 +83,13 @@ public class PlaceEntity extends BaseEntity {
         return this;
     }
 
-    public PictureEntity getPicture() {
-        return picture;
+
+    public List<CommentEntity> getComments() {
+        return comments;
     }
 
-    public PlaceEntity setPicture(PictureEntity picture) {
-        this.picture = picture;
+    public PlaceEntity setComments(List<CommentEntity> comments) {
+        this.comments = comments;
         return this;
     }
 

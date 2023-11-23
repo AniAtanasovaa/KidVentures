@@ -246,7 +246,7 @@ form.main-form {
     color: #0b2e13;
 
 }
-.button-delete, {
+.button-delete {
     margin-left: 50px;
 }
 .main-btn:hover {
@@ -442,12 +442,18 @@ form.main-form {
     border-top-right-radius: 5rem;
 }
 
+.d-flex{
+    text-align: center;
+}
+
 .details-main {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 10px;
     grid-auto-rows: minmax(100px, auto);
 }
+
+
 
 .details-main .gallery {
     grid-column: 1/4;

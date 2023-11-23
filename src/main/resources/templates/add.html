@@ -13,11 +13,13 @@
 <div class="container">
 
     <h2 class="text-center text-white">Добавете място:</h2>
-    <form th:action="@{/place/add}"
-          th:method="post"
-          th:object="${createPlaceBindingModel}"
 
-          class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
+    <form  th:object="${createPlaceBindingModel}"
+           th:method="post"
+            th:action="@{/place/add}"
+           enctype="multipart/form-data"
+
+ class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
 
         <div class="row">
 
@@ -86,8 +88,7 @@
                     <option th:each="category : ${T(defence.app.model.enums.CategoryEnum).values()}"
                             th:text="${category}"
                             th:value="${category}"
-                            th:selected="${category} == *{category}">
-                          >Изберете категория</option>
+                            th:selected="${category} == *{category}">Изберете категория</option>
                 </select>
 
                 <p class="invalid-feedback errors alert alert-danger">
@@ -96,31 +97,20 @@
             </div>
 
             <div class="form-group col-md-6 mb-3">
-            <label for="picture" class="text-white font-weight-bold">Качи URL на снимката:</label>
-                <input th:field="*{pictureUrl}" th:errorclass="is-invalid"
-                       id="picture"
-                       name="picture"
-                       type="text"
-                       class="form-control"
-                       placeholder="URL на снимката"/>
+            <label for="input" class="text-white font-weight-bold">Качете снимка:</label>
+                <input type="file" id="input" name="image" class="form-control"
+                       placeholder="Изберете снимка">
                 <p class="invalid-feedback errors alert alert-danger">
-                    Моля, въведете URL на снимката.
+                    Моля, изберете снимка.
                 </p>
 
         </div>
 
-
-        <div class="row">
-
-            <div class="col col-md-4">
-
-                <div class="button-holder d-flex">
+            <div class="form-group col-md-6 mb-3">
                     <input type="submit" class="btn btn-info btn-lg" value="Добави мястото" />
-                </div>
             </div>
         </div>
 
-        </div>
 
     </form>
 </div>

@@ -1,27 +1,23 @@
 package defence.app.service.impl;
+import defence.app.model.bindingModel.CreatePlaceBindingModel;
+
+import defence.app.model.entity.PictureEntity;
+import defence.app.repository.PictureRepository;
+import defence.app.service.PictureService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-
 import defence.app.model.entity.CategoryEntity;
-
 import defence.app.model.entity.PlaceEntity;
-
 import defence.app.model.entity.UserEntity;
-import defence.app.model.serviceModel.PlaceServiceModel;
 import defence.app.model.viewModel.PlaceViewModel;
 import defence.app.repository.PlaceRepository;
 import defence.app.service.CategoryService;
-import defence.app.service.PictureService;
 import defence.app.service.PlaceService;
 import defence.app.service.UserService;
-
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
-
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,33 +25,40 @@ public class PlaceServiceImpl implements PlaceService {
 
     private final PlaceRepository placeRepository;
     private final ModelMapper modelMapper;
-
-    private final PictureService pictureService;
-
     private final UserService userService;
     private final CategoryService categoryService;
 
-    public PlaceServiceImpl(PlaceRepository placeRepository, ModelMapper modelMapper, PictureService pictureService, UserService userService, CategoryService categoryService) {
+    private final PictureRepository pictureRepository;
+
+    public PlaceServiceImpl(PlaceRepository placeRepository, ModelMapper modelMapper, UserService userService, CategoryService categoryService, PictureRepository pictureRepository) {
         this.placeRepository = placeRepository;
         this.modelMapper = modelMapper;
-        this.pictureService = pictureService;
+
         this.userService = userService;
         this.categoryService = categoryService;
+        this.pictureRepository = pictureRepository;
+
     }
 
     @Transactional
     @Override
-    public Long addPlace(PlaceServiceModel placeServiceModel, String username) {
-        PlaceEntity placeEntity = modelMapper.map(placeServiceModel, PlaceEntity.class);
+    public Long addPlace(CreatePlaceBindingModel createPlaceBindingModel, String username) {
 
+        PlaceEntity placeEntity = modelMapper.map(createPlaceBindingModel, PlaceEntity.class);
 
         UserEntity author = userService.findFirstByUsername(username);
         placeEntity.setAuthor(author);
 
-        CategoryEntity category = categoryService.findCategoryByName(placeServiceModel.getCategory());
+        CategoryEntity category = categoryService.findCategoryByName(createPlaceBindingModel.getCategory());
         placeEntity.setCategory(category);
 
-        placeRepository.save(placeEntity);
+      String pictureUrl = createPlaceBindingModel.getPictureUrl();
+
+       PictureEntity picture = pictureRepository.findByUrl(pictureUrl);
+
+      placeEntity.setPicture(picture);
+
+        placeEntity = placeRepository.saveAndFlush(placeEntity);
 
         return placeEntity.getId();
     }
@@ -77,46 +80,27 @@ public class PlaceServiceImpl implements PlaceService {
                     .stream()
                     .map(placeEntity -> {
                         PlaceViewModel placeViewModel = modelMapper.map(placeEntity, PlaceViewModel.class);
-//
                         return placeViewModel;
                     })
                     .collect(Collectors.toList());
         }
 
 
-//    @Transactional
-//    @Override
-//    public Long findById(Long id) {
-//        Optional<PlaceEntity> placeOptional = placeRepository.findById(id);
-//        PlaceEntity place = placeOptional.orElseThrow(() -> new EntityNotFoundException("Не съществува място с това ид: " + id));
-//        return place.getId();
-//    }
-
     @Override
-    public Optional<PlaceViewModel> findViewModelById(Long id) {
-        return placeRepository.findById(id).map(
-                PlaceServiceImpl::mapToDetails
-        );
+    public PlaceViewModel findViewModelById(Long id) {
+        return placeRepository
+                .findById(id).map(placeEntity -> modelMapper.map(placeEntity,PlaceViewModel.class)).get();
     }
 
     @Override
     public Page<PlaceViewModel> getAllPlaces(Pageable pageable) {
-        return placeRepository.findAll(pageable).map(PlaceServiceImpl::mapToDetails);
+        return placeRepository.findAll(pageable)
+                .map(placeEntity -> modelMapper.map(placeEntity,PlaceViewModel.class));
     }
 
-    private static PlaceViewModel mapToDetails(PlaceEntity placeEntity) {
-
-
-        return new PlaceViewModel(
-              placeEntity.getId(),
-                        placeEntity.getName(),
-                        placeEntity.getPicture(),
-                placeEntity.getAddress(),
-                placeEntity.getCity(),
-                placeEntity.getDescription(),
-                placeEntity.getCategory()
-
-        );
+    @Override
+    public PlaceEntity getPlaceById(Long placeId) {
+        return placeRepository.findById(placeId).get();
     }
 
 

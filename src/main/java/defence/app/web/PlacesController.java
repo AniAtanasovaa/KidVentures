@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
-import java.util.List;
-
 @Controller
 @RequestMapping("/places")
 public class PlacesController {

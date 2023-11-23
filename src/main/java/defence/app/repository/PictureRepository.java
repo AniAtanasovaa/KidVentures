@@ -12,4 +12,6 @@ public interface PictureRepository extends JpaRepository<PictureEntity, Long> {
 
     @Query("SELECT p.url FROM PictureEntity p")
     List<String> findAllUrls();
+
+    PictureEntity findByUrl(String url);
 }
