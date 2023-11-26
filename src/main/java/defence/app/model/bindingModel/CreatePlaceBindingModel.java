@@ -6,6 +6,7 @@ import defence.app.model.enums.CategoryEnum;
 
 import jakarta.validation.constraints.NotBlank;
 
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -34,20 +35,19 @@ public class CreatePlaceBindingModel {
 
     private UserEntity author;
 
-    private String pictureUrl;
+    private String imageURL;
 
     public CreatePlaceBindingModel() {
     }
 
-    public CreatePlaceBindingModel(String city, String address, String name, String description, CategoryEnum category, UserEntity author, String pictureUrl) {
-
+    public CreatePlaceBindingModel(String city, String address, String name, String description,CategoryEnum category, UserEntity author, String imageURL) {
         this.city = city;
         this.address = address;
         this.name = name;
         this.description = description;
         this.category = category;
-        this.author=author;
-        this.pictureUrl =pictureUrl;
+        this.author = author;
+        this.imageURL = imageURL;
     }
 
     public String getCity() {
@@ -104,12 +104,12 @@ public class CreatePlaceBindingModel {
         return this;
     }
 
-    public String getPictureUrl() {
-        return pictureUrl;
+    public String getImageURL() {
+        return imageURL;
     }
 
-    public CreatePlaceBindingModel setPictureUrl(String pictureUrl) {
-        this.pictureUrl = pictureUrl;
+    public CreatePlaceBindingModel setImageURL(String imageURL) {
+        this.imageURL = imageURL;
         return this;
     }
 

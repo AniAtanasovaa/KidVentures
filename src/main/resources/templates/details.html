@@ -19,16 +19,9 @@
             <div th:text="*{summary()}" style="white-space: pre-line;"> </div>
         </div>
 
-        <div class="row">
-                <img th:src="@{*{picture}}" style="width:100%">
-            </div>
+        <div style="text-align: center">
+            <img style="height: 200px; width: 300px" th:src="${imageURL}" alt="test image">
         </div>
-
-<!--        <div class="container-img">-->
-<!--            <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>-->
-<!--            <img id="expandedImg" style="width:100%">-->
-<!--        </div>-->
-
     </div>
 
     <span class="nav-item text-center" sec:authorize="hasRole('ADMIN')">

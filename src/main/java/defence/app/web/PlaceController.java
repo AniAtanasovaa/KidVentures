@@ -48,13 +48,14 @@ public class PlaceController {
     }
 
     @GetMapping("/add")
-    public String add(Model model) {
+    public String add(Model model,
+                      @ModelAttribute("imageURL") String imageURL) {
 
         if (!model.containsAttribute("createPlaceBindingModel")) {
             model.addAttribute("createPlaceBindingModel", CreatePlaceBindingModel.empty());
         }
         model.addAttribute("categories", CategoryEnum.values());
-
+        model.addAttribute("imageURL", imageURL);
 
         return "add";
     }
@@ -62,11 +63,11 @@ public class PlaceController {
 
     @PostMapping("/add")
     public String addConfirm(
-            @RequestParam("image") MultipartFile multipartFile,
             @Valid CreatePlaceBindingModel createPlaceBindingModel,
             BindingResult bindingResult,
             RedirectAttributes redirectAttributes,
-            Principal principal) throws IOException {
+            Principal principal,
+            @RequestParam("image") MultipartFile multipartFile) throws IOException {
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("createPlaceBindingModel", createPlaceBindingModel);
@@ -76,7 +77,7 @@ public class PlaceController {
             return "redirect:/place/add";
         }
 
-        String url = uploadPictureService.uploadPictureFile(multipartFile);
+
 
         String username = principal.getName();
 
@@ -84,24 +85,22 @@ public class PlaceController {
 
         Long placeId = placeService.addPlace(createPlaceBindingModel, username);
 
-        pictureService.setPlace(placeId, url);
+        String imageURL = uploadPictureService.uploadPictureFile(multipartFile);
+
+        pictureService.setPlace(placeId, imageURL);
 
           return "redirect:/place/" + placeId;
     }
 
     @GetMapping("/{id}")
     public String details(@PathVariable("id") Long id, Model model) {
-
-        PlaceViewModel placeViewModel = placeService
-                .findViewModelById(id);
-
-
-
+        PlaceViewModel placeViewModel = placeService.findViewModelById(id);
         model.addAttribute("place", placeViewModel);
-
-
-        return "details"; // Името на шаблона, който ще бъде използван за показване на детайлите за мястото
+        model.addAttribute("imageURL", placeViewModel.getPicture().getUrl());
+        return "details";
     }
+
+
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") Long id) {

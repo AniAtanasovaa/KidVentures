@@ -11,6 +11,8 @@ public class KidVenturesApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(KidVenturesApplication.class, args);
+
+
 	}
 
 }

@@ -1,9 +1,8 @@
 package defence.app.service.impl;
 import defence.app.model.bindingModel.CreatePlaceBindingModel;
 
-import defence.app.model.entity.PictureEntity;
 import defence.app.repository.PictureRepository;
-import defence.app.service.PictureService;
+import defence.app.service.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import defence.app.model.entity.CategoryEntity;
@@ -11,9 +10,6 @@ import defence.app.model.entity.PlaceEntity;
 import defence.app.model.entity.UserEntity;
 import defence.app.model.viewModel.PlaceViewModel;
 import defence.app.repository.PlaceRepository;
-import defence.app.service.CategoryService;
-import defence.app.service.PlaceService;
-import defence.app.service.UserService;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -28,15 +24,13 @@ public class PlaceServiceImpl implements PlaceService {
     private final UserService userService;
     private final CategoryService categoryService;
 
-    private final PictureRepository pictureRepository;
 
-    public PlaceServiceImpl(PlaceRepository placeRepository, ModelMapper modelMapper, UserService userService, CategoryService categoryService, PictureRepository pictureRepository) {
+    public PlaceServiceImpl(PlaceRepository placeRepository, ModelMapper modelMapper, UserService userService, CategoryService categoryService) {
         this.placeRepository = placeRepository;
         this.modelMapper = modelMapper;
 
         this.userService = userService;
         this.categoryService = categoryService;
-        this.pictureRepository = pictureRepository;
 
     }
 
@@ -52,11 +46,11 @@ public class PlaceServiceImpl implements PlaceService {
         CategoryEntity category = categoryService.findCategoryByName(createPlaceBindingModel.getCategory());
         placeEntity.setCategory(category);
 
-      String pictureUrl = createPlaceBindingModel.getPictureUrl();
-
-       PictureEntity picture = pictureRepository.findByUrl(pictureUrl);
-
-      placeEntity.setPicture(picture);
+//      String pictureUrl = createPlaceBindingModel.getImageURL();
+//
+//       PictureEntity picture = pictureRepository.findByUrl(pictureUrl);
+//
+//      placeEntity.setPicture(picture);
 
         placeEntity = placeRepository.saveAndFlush(placeEntity);
 
