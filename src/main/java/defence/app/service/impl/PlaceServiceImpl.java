@@ -97,6 +97,29 @@ public class PlaceServiceImpl implements PlaceService {
         return placeRepository.findById(placeId).get();
     }
 
+    @Override
+    public List<PlaceViewModel> findPlacesByCategory(CategoryEntity category) {
+        // Тук извиквате вашите репозитории, за да намерите местата по категория
+        // Нека предположим, че имате метод в репозиторията, който връща списък с места по категория
+        List<PlaceEntity> places = placeRepository.findByCategory(category);
+
+        // Преобразуване на списъка с места в списък с PlaceViewModel
+        return places.stream()
+                .map(this::mapPlaceEntityToViewModel)
+                .collect(Collectors.toList());
+    }
+
+    private PlaceViewModel mapPlaceEntityToViewModel(PlaceEntity placeEntity) {
+        // Тук използвате modelMapper или ръчно мапване, за да преобразувате PlaceEntity в PlaceViewModel
+        // Примерно:
+        PlaceViewModel placeViewModel = new PlaceViewModel();
+        placeViewModel.setName(placeEntity.getName());
+        placeViewModel.setDescription(placeEntity.getDescription());
+        // Добавете останалата информация, която искате да прехвърлите
+
+        return placeViewModel;
+    }
+
 
 }
 

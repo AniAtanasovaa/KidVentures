@@ -45,7 +45,6 @@ public class CategoryServiceImpl implements CategoryService {
                 case НАВЪН -> categoryEntity.setDescription("Места на открито");
                 case ВЪТРЕ -> categoryEntity.setDescription("Места на закрито");
                 case ЖИВОТНИ -> categoryEntity.setDescription("Места, в които могат да се срещнат животни");
-                case DEFAULT_CATEGORY -> categoryEntity.setDescription("Дефолтна категория - обхваща всички места");
 
 
             }

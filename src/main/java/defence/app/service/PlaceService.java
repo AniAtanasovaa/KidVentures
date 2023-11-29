@@ -1,6 +1,7 @@
 package defence.app.service;
 
 import defence.app.model.bindingModel.CreatePlaceBindingModel;
+import defence.app.model.entity.CategoryEntity;
 import defence.app.model.entity.PlaceEntity;
 import defence.app.model.serviceModel.PlaceServiceModel;
 import defence.app.model.viewModel.PlaceViewModel;
@@ -23,6 +24,8 @@ public interface PlaceService {
    Page<PlaceViewModel> getAllPlaces(Pageable pageable);
 
     PlaceEntity getPlaceById(Long placeId);
+
+    List<PlaceViewModel> findPlacesByCategory(CategoryEntity category);
 }
 
 //ToDo pageable лекция Error Handing остава 1.22

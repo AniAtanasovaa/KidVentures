@@ -3,8 +3,8 @@ package defence.app.model.enums;
 public enum CategoryEnum {
     НАВЪН,
     ВЪТРЕ,
-    ЖИВОТНИ,
-    DEFAULT_CATEGORY("ИЗВЪН КАТЕГОРИИТЕ");
+    ЖИВОТНИ;
+
 
     private final String displayName;
 
@@ -13,7 +13,7 @@ public enum CategoryEnum {
     }
 
     CategoryEnum() {
-        this.displayName = null;  // или поставете стойност по подразбиране, която ви удовлетворява
+        this.displayName = null;
     }
 
     public String getDisplayName() {

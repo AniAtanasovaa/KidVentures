@@ -93,7 +93,7 @@ public class PlaceViewModel { // todo този клас ще се използв
     }
 
 
-    public String summary() {
+    public String getSummary() {
         return "Име на мястото: " + name + "\nКатегория: " + category.getName().name() + "\nГрад: " + city + "\nАдрес: " + address;
     }
 }

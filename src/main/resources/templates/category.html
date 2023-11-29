@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="~{fragments/head}">
+</head>
+
+<body>
+<div>
+    <nav th:replace="~{fragments/navbar}"></nav>
+</div>
+<p></p>
+<br>
+<p></p>
+<br>
+<h2 class="text-center text-white">Всички места в категория: <span th:text="${categoryName}"></span></h2>
+
+<<!-- Display Places in the Category -->
+<section class="boxes">
+
+    <div th:each="place : ${places}">
+
+        <div class="box">
+            <h3 th:text="${place.name}"></h3>
+            <p th:text="${place.description}"></p>
+            <!-- Добавете останалата информация, която искате да покажете -->
+        </div>
+    </div>
+</section>
+
+</body>
+
+<div class="footer"><h6>&copy; 2023 - Ани Петкова - Всички права запазени.</h6></div>
+
+</html>

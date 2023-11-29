@@ -16,7 +16,7 @@
     <div th:object="${place}" class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
 
         <div class="box">
-            <div th:text="*{summary()}" style="white-space: pre-line;"> </div>
+            <div th:text="${place.getSummary()}" style="white-space: pre-line;"> </div>
         </div>
 
         <div style="text-align: center">

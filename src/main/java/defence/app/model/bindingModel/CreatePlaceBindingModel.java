@@ -31,9 +31,11 @@ public class CreatePlaceBindingModel {
 
 
     @NotNull(message = "Моля, изберете категория.")
-    private CategoryEnum category = CategoryEnum.DEFAULT_CATEGORY;
+    private CategoryEnum category = CategoryEnum.ВЪТРЕ;
 
     private UserEntity author;
+
+//    @NotEmpty( message = "Моля, качете снимка.")
 
     private String imageURL;
 
@@ -114,6 +116,6 @@ public class CreatePlaceBindingModel {
     }
 
     public static CreatePlaceBindingModel empty() {
-        return new CreatePlaceBindingModel(null, null, null,null,CategoryEnum.DEFAULT_CATEGORY,null, null);
+        return new CreatePlaceBindingModel(null, null, null,null,CategoryEnum.ВЪТРЕ,null, null);
     }
 }
