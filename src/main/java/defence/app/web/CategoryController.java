@@ -42,7 +42,7 @@ public class CategoryController {
         // Намерете всички места в дадената категория
         List<PlaceViewModel> placesInCategory = placeService.findPlacesByCategory(category);
 
-        model.addAttribute("places", placesInCategory);
+        model.addAttribute("placesInCategory", placesInCategory);
         model.addAttribute("categoryName", categoryName);
 
         return "category";

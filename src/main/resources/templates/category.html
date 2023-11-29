@@ -15,16 +15,16 @@
 <p></p>
 <br>
 <h2 class="text-center text-white">Всички места в категория: <span th:text="${categoryName}"></span></h2>
-
-<<!-- Display Places in the Category -->
 <section class="boxes">
-
-    <div th:each="place : ${places}">
-
+    <div th:each="place : ${placesInCategory}">
         <div class="box">
             <h3 th:text="${place.name}"></h3>
             <p th:text="${place.description}"></p>
-            <!-- Добавете останалата информация, която искате да покажете -->
+            <p th:text="${place.city}"></p>
+            <p th:text="${place.address}"></p>
+            <div style="text-align: center">
+                <img style="height: 200px; width: 200px" th:src="${place.getPicture().getUrl()}" alt="test image">
+            </div>
         </div>
     </div>
 </section>

@@ -115,6 +115,9 @@ public class PlaceServiceImpl implements PlaceService {
         PlaceViewModel placeViewModel = new PlaceViewModel();
         placeViewModel.setName(placeEntity.getName());
         placeViewModel.setDescription(placeEntity.getDescription());
+        placeViewModel.setCity(placeEntity.getCity());
+        placeViewModel.setAddress(placeEntity.getAddress());
+        placeViewModel.setPicture(placeEntity.getPicture());
         // Добавете останалата информация, която искате да прехвърлите
 
         return placeViewModel;
