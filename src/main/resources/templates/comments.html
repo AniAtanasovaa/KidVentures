@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns="http://www.w3.org/1999/html">
+<head th:replace="~{fragments/head}">
+</head>
+
+<body>
+<div>
+    <nav th:replace="~{fragments/navbar}"></nav>
+</div>
+
+<div class="container">
+    <h2 class="text-center text-white">Детайли</h2>
+
+    <!-- Контейнер за визуализация на коментарите -->
+    <div id="comments-container"></div>
+
+    <div class="text-center">
+        <br>
+        <a href="/" class="fun-about"><h2>Заповядайте в основното меню...</h2></a>
+    </div>
+
+</div>
+
+</body>
+
+<div class="footer"><h6>&copy; 2023 - Ани Петкова - Всички права запазени.</h6></div>
+
+</html>
