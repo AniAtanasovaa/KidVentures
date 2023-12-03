@@ -74,6 +74,7 @@ public class CommentController {
         // Валидацията е успешна, добавете коментара
         commentService.createComment(newCommentBindingModel, username, placeId);
 
-        return "redirect:/place/" + placeId;
+//        return "redirect:/place/" + placeId;
+        return "redirect:/comments/place/{placeId}";
     }
 }
