@@ -5,10 +5,7 @@ import defence.app.model.enums.CategoryEnum;
 
 
 import defence.app.model.viewModel.PlaceViewModel;
-import defence.app.service.PictureService;
-import defence.app.service.PlaceService;
-import defence.app.service.UploadPictureService;
-import defence.app.service.UserService;
+import defence.app.service.*;
 
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
@@ -34,12 +31,15 @@ public class PlaceController {
     private final UserService userService;
     private final ModelMapper modelMapper;
 
-    public PlaceController(PlaceService placeService, UploadPictureService uploadPictureService, PictureService pictureService, UserService userService, ModelMapper modelMapper) {
+    private final CommentService commentService;
+
+    public PlaceController(PlaceService placeService, UploadPictureService uploadPictureService, PictureService pictureService, UserService userService, ModelMapper modelMapper, CommentService commentService) {
         this.placeService = placeService;
         this.uploadPictureService = uploadPictureService;
         this.pictureService = pictureService;
         this.userService = userService;
         this.modelMapper = modelMapper;
+        this.commentService = commentService;
     }
 
     @ModelAttribute("categories")
@@ -88,6 +88,9 @@ public class PlaceController {
         String imageURL = uploadPictureService.uploadPictureFile(multipartFile);
 
         pictureService.setPlace(placeId, imageURL);
+
+        // Добавяне на коментар по подразбиране към новосъздаденото място
+        commentService.createDefaultComment(placeId);
 
           return "redirect:/place/" + placeId;
     }

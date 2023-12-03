@@ -14,7 +14,27 @@
     <h2 class="text-center text-white">Детайли</h2>
 
     <!-- Контейнер за визуализация на коментарите -->
-    <div id="comments-container"></div>
+    <div id="comments-container">
+        <!-- Тук вече съдържанието на коментарите се визуализира при зареждането на страницата -->
+        <div th:each="comment : ${comments}">
+            <p th:text="${comment.content}"></p>
+        </div>
+    </div>
+
+
+
+    <!-- Форма за добавяне на коментар -->
+    <form th:method="post" th:action="@{/comments/{placeId}(placeId=${place.id})}" th:object="${newCommentBindingModel}"
+          class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
+        <!-- Полета за въвеждане на информация за коментара -->
+        <!-- Пример: -->
+        <label for="comment">Comment:</label>
+        <textarea id="comment" name="comment" th:field="*{content}" class="text-white font-weight-bold" required></textarea>
+
+        <!-- Бутон за изпращане на формата -->
+        <button type="submit">Добави коментар</button>
+    </form>
+
 
     <div class="text-center">
         <br>

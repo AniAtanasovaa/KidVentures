@@ -6,7 +6,6 @@ import jakarta.validation.constraints.Size;
 public class NewCommentBindingModel {
 
     @NotBlank
-    @Size(min = 10)
     String content;
 
     public NewCommentBindingModel() {

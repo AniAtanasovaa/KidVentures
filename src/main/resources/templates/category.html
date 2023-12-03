@@ -23,7 +23,7 @@
             <p th:text="${place.city}"></p>
             <p th:text="${place.address}"></p>
             <div style="text-align: center">
-                <img style="height: 200px; width: 200px" th:src="${place.getPicture().getUrl()}" alt="test image">
+                <img style="height: 200px; width: 200px" th:if="${place.picture != null}" th:src="${place.picture.url}" alt="test image">
             </div>
         </div>
     </div>

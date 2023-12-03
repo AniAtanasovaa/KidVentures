@@ -12,7 +12,7 @@ public class CloudinaryConfig {
 
     private final String CLOUD_NAME = "da8uhjfq5";
     private final String API_KEY = "694139327482814";
-    private final String API_SECRET = "";
+    private final String API_SECRET = "e4IJlIl_cWuxYmGIs6ipFN_17pA";
 
 
 

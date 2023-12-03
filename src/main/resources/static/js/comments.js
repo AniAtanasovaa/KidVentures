@@ -1,29 +1,35 @@
- // Функция за извличане и визуализация на коментарите за конкретното място
+// Функция за извличане и визуализация на коментарите за конкретното място
 async function loadCommentsForPlace(placeId) {
     try {
-        const response = await fetch(`/api/comments/place/${placeId}`);
-        const comments = await response.json();
-
-        // Тук може да извършите логика за визуализация на коментарите, например, добавяне към DOM
-        const commentsContainer = document.getElementById('comments-container');
-        comments.forEach(comment => {
-            const commentElement = document.createElement('div');
-            commentElement.textContent = comment.content;
-            commentsContainer.appendChild(commentElement);
+        const response = await fetch(`/comments/${placeId}`, {
+            method: 'GET',
+            headers: {
+                'Accept': 'text/html',
+                // други хедъри, ако са необходими
+            },
         });
 
-        // Пренасочване към comments.html
-        window.location.href = '/api/comments/place/' + placeId;
+        const data = await response.text();
+
+        // Уверете се, че comments-container е вече наличен в DOM преди да го използвате
+        const commentsContainer = document.getElementById("comments-container");
+        if (commentsContainer) {
+            commentsContainer.innerHTML = data;
+        } else {
+            console.error("comments-container not found in the DOM");
+        }
     } catch (error) {
-        console.error('Error:', error);
+        console.error("Error loading comments:", error);
     }
 }
 
- // Обработчик на бутона за зареждане на коментарите
- document.getElementById('loadCommentsButton').addEventListener('click', function () {
-     // Извличане на идентификационния номер от атрибута th:data
-     const placeId = document.getElementById('loadCommentsButton').getAttribute('data-place-id');
-
-     // Извикване на функцията с динамично подаденото ID на място
-     loadCommentsForPlace(placeId);
- });
+window.onload = function () {
+    // Обработчик на бутона за зареждане на коментарите
+    document.getElementById('loadCommentsButton').addEventListener('click', function () {
+        // Извличане на идентификационния номер от атрибута th:data
+        const placeId = document.getElementById('loadCommentsButton').getAttribute('data-place-id');
+        console.log("Loading comments...");
+        // Извикване на функцията с динамично подаденото ID на място
+        loadCommentsForPlace(placeId);
+    });
+};
