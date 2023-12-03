@@ -1,9 +1,6 @@
 package defence.app.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
@@ -22,6 +19,7 @@ public class CommentEntity extends BaseEntity{
     private UserEntity author;
 
     @ManyToOne
+    @JoinColumn(name = "place_id")
     private PlaceEntity place;
 
     public CommentEntity() {

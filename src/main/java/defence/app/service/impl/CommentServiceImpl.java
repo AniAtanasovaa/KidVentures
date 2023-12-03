@@ -9,6 +9,7 @@ import defence.app.repository.CommentRepository;
 import defence.app.service.CommentService;
 import defence.app.service.PlaceService;
 import defence.app.service.UserService;
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -35,10 +36,11 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
+    @Transactional
     public CommentEntity createComment(NewCommentBindingModel newCommentBindingModel, String username, Long id) {
 
         CommentEntity commentEntity = modelMapper.map(newCommentBindingModel, CommentEntity.class);
-        commentEntity.setApproved(false);
+        commentEntity.setApproved(true);
         commentEntity.setCreated(LocalDateTime.now());
         commentEntity.setContent(newCommentBindingModel.getContent());
         PlaceEntity place = placeService.getPlaceById(id);

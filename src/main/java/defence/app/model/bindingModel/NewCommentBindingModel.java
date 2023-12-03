@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Size;
 
 public class NewCommentBindingModel {
 
-    @NotBlank
+
     String content;
 
     public NewCommentBindingModel() {
