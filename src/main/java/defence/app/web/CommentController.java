@@ -37,8 +37,13 @@ public class CommentController {
         this.modelMapper = modelMapper;
     }
 
-    @GetMapping("/comments/{placeId}")
-    public String getCommentsForPlace(@PathVariable Long placeId, Model model) {
+    @GetMapping("/comments/place/{placeId}")
+    public String getCommentsForPlace(@PathVariable Long placeId, Model model, RedirectAttributes redirectAttributes) {
+        // Извличане на flash атрибутите и добавяне към модела
+        if (redirectAttributes != null) {
+            model.addAttribute("newCommentBindingModel", redirectAttributes.getFlashAttributes().get("newCommentBindingModel"));
+            model.addAttribute("org.springframework.validation.BindingResult.newCommentBindingModel", redirectAttributes.getFlashAttributes().get("org.springframework.validation.BindingResult.newCommentBindingModel"));
+        }
         // Зареждане на информация за мястото
         PlaceEntity place = placeService.getPlaceById(placeId);
         model.addAttribute("place", place);
@@ -47,32 +52,28 @@ public class CommentController {
         model.addAttribute("comments", comments);
         model.addAttribute("newCommentBindingModel", new NewCommentBindingModel());
 
-        return "comments";
+        return "details";
     }
 
-    @PostMapping("/comments/{placeId}")
+    @PostMapping("/comments/place/{placeId}")
     public String addComment(@PathVariable Long placeId,
                              @ModelAttribute("newCommentBindingModel")
                              @Valid NewCommentBindingModel newCommentBindingModel,
                              BindingResult bindingResult,
-                             RedirectAttributes redirectAttributes, Principal principal) {
+                             Model model, Principal principal) {
 
         if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("newCommentBindingModel", newCommentBindingModel);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.newCommentBindingModel",
-                    bindingResult);
-            return "redirect:/comments/" + placeId; // Пренасочване обратно към страницата с коментарите
+            model.addAttribute("org.springframework.validation.BindingResult.newCommentBindingModel", bindingResult);
+            model.addAttribute("place", placeService.getPlaceById(placeId));
+            model.addAttribute("comments", commentService.getAllCommentsForPlace(placeId));
+            return "details"; // Зареждаме отново същата страница с грешката
         }
 
         String username = principal.getName();
 
-        UserEntity author = userService.findFirstByUsername(username);
-
-
-
         // Валидацията е успешна, добавете коментара
         commentService.createComment(newCommentBindingModel, username, placeId);
 
-        return "redirect:/comments/" + placeId;
+        return "redirect:/place/" + placeId;
     }
 }

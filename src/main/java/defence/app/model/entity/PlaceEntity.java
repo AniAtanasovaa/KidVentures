@@ -102,5 +102,7 @@ public class PlaceEntity extends BaseEntity {
         return this;
     }
 
-
+    public String getSummary() {
+        return "Име на мястото: " + name + "\nКатегория: " + category.getName().name() + "\nГрад: " + city + "\nАдрес: " + address;
+    }
 }
