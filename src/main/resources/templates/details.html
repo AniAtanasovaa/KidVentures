@@ -14,38 +14,31 @@
 <div class="container">
     <h2 class="text-center text-white">Детайли</h2>
 
-    <div th:object="${place}" class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
+    <div th:object="${place}" class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center" data-place-id="${place.id}">
 
         <div class="box">
             <div th:text="${place.getSummary()}" style="white-space: pre-line;"> </div>
         </div>
 
         <div style="text-align: center">
-            <img style="height: 200px; width: 300px" th:src="${imageURL}" alt="test image">
+            <img style="height: 200px; width: 300px" th:src="${imageURL}" alt="Снимка">
         </div>
-
-        <button id="loadCommentsButton" class="btn btn-info btn-lg justify-content-center" th:data-place-id="${place.id}">Зареди коментари за мястото</button>
     </div>
 
-    <!-- Контейнер за визуализация на коментарите -->
-    <div id="comments-container">
-        <!-- Тук вече съдържанието на коментарите се визуализира при зареждането на страницата -->
-        <div th:each="comment : ${comments}">
+    <div id="comments-container" class="boxes about_container">
+
+        <div class="box" th:each="comment : ${comments}">
             <p th:text="${comment.content}"></p>
         </div>
     </div>
 
-
-    <!-- Форма за добавяне на коментар -->
     <form th:method="post" th:action="@{/comments/place/{placeId}(placeId=${place.id})}" th:object="${newCommentBindingModel}"
           class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
-        <!-- Полета за въвеждане на информация за коментара -->
-        <!-- Пример: -->
+
         <label for="comment">Коментар:</label>
         <textarea id="comment" name="content" class="font-weight-bold"></textarea>
 
-        <!-- Бутон за изпращане на формата -->
-        <button type="submit">Добави коментар</button>
+        <button type="submit">Зареди</button>
     </form>
 
     <span class="nav-item text-center" sec:authorize="hasRole('ADMIN')">
@@ -65,7 +58,6 @@
     </div>
 
 </div>
-
 
 </body>
 

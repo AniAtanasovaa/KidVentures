@@ -1,7 +1,7 @@
 package defence.app.service.impl;
 import defence.app.model.bindingModel.CreatePlaceBindingModel;
 
-import defence.app.repository.PictureRepository;
+import defence.app.repository.CommentRepository;
 import defence.app.service.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,14 +24,17 @@ public class PlaceServiceImpl implements PlaceService {
     private final UserService userService;
     private final CategoryService categoryService;
 
+    private final CommentRepository commentRepository;
 
-    public PlaceServiceImpl(PlaceRepository placeRepository, ModelMapper modelMapper, UserService userService, CategoryService categoryService) {
+
+    public PlaceServiceImpl(PlaceRepository placeRepository, ModelMapper modelMapper, UserService userService, CategoryService categoryService, CommentRepository commentRepository) {
         this.placeRepository = placeRepository;
         this.modelMapper = modelMapper;
 
         this.userService = userService;
         this.categoryService = categoryService;
 
+        this.commentRepository = commentRepository;
     }
 
     @Transactional
@@ -61,6 +64,8 @@ public class PlaceServiceImpl implements PlaceService {
     @Override
     @Transactional
     public void deletePlace(Long id) {
+
+        commentRepository.deleteAllByPlaceId(id);
 
         placeRepository.deleteById(id);
 

@@ -1,11 +1,11 @@
 package defence.app.model.bindingModel;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.NotEmpty;
+
 
 public class NewCommentBindingModel {
 
-
+@NotEmpty
     String content;
 
     public NewCommentBindingModel() {
