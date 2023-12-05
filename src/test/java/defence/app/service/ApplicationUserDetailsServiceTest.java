@@ -1,9 +1,10 @@
-package defence.app.service.impl;
+package defence.app.service;
 
 import defence.app.model.entity.RoleEntity;
 import defence.app.model.entity.UserEntity;
 import defence.app.model.enums.RoleEnum;
 import defence.app.repository.UserRepository;
+import defence.app.service.impl.ApplicationUserDetailsService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +16,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;

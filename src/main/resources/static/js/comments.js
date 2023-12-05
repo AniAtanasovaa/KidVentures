@@ -1,8 +1,8 @@
-// Съхранете URL на изображението преди актуализацията
-const imageUrl = document.querySelector('[data-place-id]').querySelector('img').src;
-
 async function loadCommentsForPlace(placeId) {
     try {
+        // Запазване на URL на изображението преди актуализацията
+        const imageUrl = document.querySelector('[data-place-id]').querySelector('img').src;
+
         // Зареждане на коментарите
         const response = await fetch(`/comments/place/${placeId}`, {
             method: 'GET',
@@ -16,15 +16,15 @@ async function loadCommentsForPlace(placeId) {
         if (commentsContainer) {
             if (data.trim() !== "") {
                 commentsContainer.innerHTML = data;
+
+                // Възстановяване на изображението след актуализацията
+                document.querySelector('[data-place-id]').querySelector('img').src = imageUrl;
             } else {
                 console.log("No comments available.");
             }
         } else {
             console.error("comments-container not found in the DOM");
         }
-
-        // Възстановяване на изображението след актуализацията
-        document.querySelector('[data-place-id]').querySelector('img').src = imageUrl;
     } catch (error) {
         console.error("Error loading comments:", error);
     }
@@ -42,6 +42,15 @@ document.querySelector("form").addEventListener("submit", async function (e) {
         },
         body: new URLSearchParams(new FormData(this)).toString(),
     });
+
+    // След като добавим коментар, зареждаме отново коментарите
     console.log("Comment added. Loading comments...");
+    loadCommentsForPlace(placeId);
+});
+
+// Зареждане на коментарите при зареждане на страницата
+document.addEventListener("DOMContentLoaded", function () {
+    const placeId = document.querySelector('[data-place-id]').getAttribute('data-place-id');
+    console.log("Loading comments on page load...");
     loadCommentsForPlace(placeId);
 });
