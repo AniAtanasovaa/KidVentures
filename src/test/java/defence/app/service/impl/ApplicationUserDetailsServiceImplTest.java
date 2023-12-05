@@ -1,4 +1,4 @@
-package defence.app.service;
+package defence.app.service.impl;
 
 import defence.app.model.entity.RoleEntity;
 import defence.app.model.entity.UserEntity;
@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class ApplicationUserDetailsServiceTest {
+public class ApplicationUserDetailsServiceImplTest {
 
 
     private ApplicationUserDetailsService testApplicationUserDetailsService;

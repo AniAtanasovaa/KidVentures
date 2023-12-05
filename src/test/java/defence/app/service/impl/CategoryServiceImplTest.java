@@ -1,9 +1,10 @@
-package defence.app.service;
+package defence.app.service.impl;
 
 import defence.app.model.entity.CategoryEntity;
 import defence.app.model.enums.CategoryEnum;
 import defence.app.repository.CategoryRepository;
 
+import defence.app.service.CategoryService;
 import defence.app.service.impl.CategoryServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class CategoryServiceTest {
+class CategoryServiceImplTest {
 
     @Mock
     private CategoryRepository testCategoryRepository;

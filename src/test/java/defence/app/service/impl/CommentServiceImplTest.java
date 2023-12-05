@@ -1,10 +1,14 @@
-package defence.app.service;
+package defence.app.service.impl;
 import defence.app.model.bindingModel.NewCommentBindingModel;
 import defence.app.model.entity.CommentEntity;
 import defence.app.model.entity.PlaceEntity;
 import defence.app.model.entity.UserEntity;
 import defence.app.model.viewModel.CommentViewModel;
 import defence.app.repository.*;
+import defence.app.service.CategoryService;
+import defence.app.service.CommentService;
+import defence.app.service.PlaceService;
+import defence.app.service.UserService;
 import defence.app.service.impl.CategoryServiceImpl;
 import defence.app.service.impl.CommentServiceImpl;
 import defence.app.service.impl.PlaceServiceImpl;
@@ -26,7 +30,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class CommentServiceTest {
+class CommentServiceImplTest {
 
     private CommentService commentService;
 
