@@ -33,7 +33,7 @@ public class DailyUserRegistrationTask {
         System.out.println("Daily user registrations on " + today + ": " + dailyUserRegistrations);
     }
 
-    private void saveDailyStatistics(LocalDate date, long dailyUserRegistrations) {
+    public void saveDailyStatistics(LocalDate date, long dailyUserRegistrations) {
 
 
         DailyStatisticsEntity dailyStatistics = dailyStatisticsRepository.findByDate(date);
