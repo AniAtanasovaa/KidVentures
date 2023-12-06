@@ -1,16 +1,25 @@
-INSERT INTO users (id, first_name, last_name, username, password, email)
-VALUES
-    (1, 'Admin','Adminov', 'admin', '95c1933b8ffe84f085f2839899d1673260be58dbd9c2c787ac35515805502c996417596dae9a92880aaa50a046fc7151', 'admin@example.com'),
-    (2, 'User','User', 'user', '95c1933b8ffe84f085f2839899d1673260be58dbd9c2c787ac35515805502c996417596dae9a92880aaa50a046fc7151', 'admin@example.com');
-
-
-INSERT INTO roles (`id`, `role`)
-VALUES
-    (1, 'ADMIN'),
-    (2, 'USER');
-
-INSERT INTO users_roles(`user_entity_id`, `roles_id`)
-VALUES
-    (1, 1),
-    (1, 2),
-    (2, 2);
+#
+# -- Insert places
+# INSERT INTO places (id, address,city, description, name,  author_id, category_id)
+# VALUES
+#     (1, 'Mладост', 'София', 'Парк', 'Парк 100 години София', 1, 1),
+#     (2, 'Младост', 'София', 'Детски кът', 'Dreams', 1, 2),
+#     (3, 'Център', 'София', 'Зоопарк', 'Зоологическа градина София', 1, 3);
+#
+# -- Insert comments
+# INSERT INTO comments (id,content, created,  author_id, place_id)
+# VALUES
+#     (1,'Хубаво място',  '2023-01-01T12:00:00', 1, 1),
+#     (2,'Приятно място', '2023-01-02T12:00:00',  1, 2),
+#     (3, 'Чудесно място за деца','2023-01-03T12:00:00',  1, 3);
+#
+# -- Insert pictures
+#
+# INSERT INTO pictures (id, url, author_id, place_id)
+# VALUES (4, '/images/ani.jpg', 1, 1);
+# INSERT INTO pictures (id, url, author_id, place_id)
+# VALUES (5, '/images/lulka.jpg', 1, 2);
+# INSERT INTO pictures (id, url, author_id, place_id)
+# VALUES (3, '/images/zaek.jpg', 1, 3);
+#
+#

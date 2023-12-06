@@ -88,7 +88,6 @@ class CommentServiceImplTest {
         CommentEntity savedComment = new CommentEntity();
         savedComment.setPlace(new PlaceEntity());
         savedComment.setAuthor(new UserEntity());
-        savedComment.setApproved(true);
         savedComment.setCreated(LocalDateTime.now());
         savedComment.setContent(content);
 

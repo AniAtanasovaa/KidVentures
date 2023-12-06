@@ -315,7 +315,7 @@ form.main-form {
 .showcase {
     grid-area: showcase;
     min-height: 400px;
-    background: url('/static/images/ball-start.jpg');
+    background: url('/static/images/lulka.jpg');
     background-size: cover;
     background-position: center;
     padding: 3rem;

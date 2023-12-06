@@ -12,9 +12,6 @@ public class CommentViewModel {
 
     private LocalDateTime created;
 
-    private  boolean canApprove;
-
-    private  boolean canDelete;
 
     public CommentViewModel() {
     }
@@ -55,21 +52,5 @@ public class CommentViewModel {
         return this;
     }
 
-    public boolean isCanApprove() {
-        return canApprove;
-    }
 
-    public CommentViewModel setCanApprove(boolean canApprove) {
-        this.canApprove = canApprove;
-        return this;
-    }
-
-    public boolean isCanDelete() {
-        return canDelete;
-    }
-
-    public CommentViewModel setCanDelete(boolean canDelete) {
-        this.canDelete = canDelete;
-        return this;
-    }
 }

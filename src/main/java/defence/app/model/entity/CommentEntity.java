@@ -8,11 +8,9 @@ import java.time.LocalDateTime;
 @Table(name = "comments")
 public class CommentEntity extends BaseEntity{
 
-    private boolean approved;
-
     private LocalDateTime created;
 
-    @Column(columnDefinition = "TEXT", nullable = false)
+    @Column( nullable = false)
     private String content;
 
     @ManyToOne //от дясната страна е това, което имаме отдолу, като поле
@@ -25,14 +23,6 @@ public class CommentEntity extends BaseEntity{
     public CommentEntity() {
     }
 
-    public boolean isApproved() {
-        return approved;
-    }
-
-    public CommentEntity setApproved(boolean approved) {
-        this.approved = approved;
-        return this;
-    }
 
     public LocalDateTime getCreated() {
         return created;

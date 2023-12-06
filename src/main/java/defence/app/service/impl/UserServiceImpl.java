@@ -5,11 +5,9 @@ import defence.app.model.entity.UserEntity;
 
 import defence.app.model.enums.RoleEnum;
 import defence.app.model.serviceModel.UserServiceModel;
-
 import defence.app.repository.RoleRepository;
 import defence.app.repository.UserRepository;
 import defence.app.service.UserService;
-
 import defence.app.service.exception.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.ApplicationEventPublisher;
@@ -17,9 +15,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
-import java.util.Arrays;
 
 import java.util.Optional;
 //Todo при регистрация на потребител с данни, които вече са на друг потребител, не изкарва грешка, но полсе същият потребител, който лпреди е можел да се регистрира, вече не може дасе логне
@@ -43,27 +39,6 @@ public class UserServiceImpl implements UserService {
         this.applicationEventPublisher = applicationEventPublisher;
     }
 
-    @Override
-    public void initRoles() {
-
-        if (userRepository.count() != 0) {
-            return;
-        }
-
-        Arrays.stream(RoleEnum.values()).forEach(roleEnum -> {
-            RoleEntity roleEntity = new RoleEntity();
-            roleEntity.setRole(roleEnum);
-
-            switch (roleEnum) {
-
-                case ADMIN -> roleEntity.setDescription("This is the administrator");
-                case USER -> roleEntity.setDescription("This is the default role for every newly registered user");
-            }
-
-            roleRepository.save(roleEntity);
-
-        });
-    }
 
 
 
@@ -169,6 +144,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<UserEntity> findById(Long authorId) {
         return userRepository.findById(authorId);
+    }
+
+    @Override
+    public boolean isUserTableNull() {
+        return userRepository.count()==0;
     }
 
 

@@ -20,9 +20,9 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity.authorizeHttpRequests(
-                // Define which urls are visible by which users
+                // Дефинирам, кои urls са видими и точно от кои потребители
                 authorizeRequests -> authorizeRequests
-                        // All static resources which are situated in js, images, css are available for anyone
+                        // Всички статични ресурси, които се намират в js, изображения, css са достъпни за всеки
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         // Allow anyone to see the home page, the registration page and the login form
                         .requestMatchers("/", "/login", "/register", "/login-error", "/about").permitAll()
@@ -74,3 +74,13 @@ public class SecurityConfiguration {
 
 
 }
+//HttpSecurity е обект в Spring Security, който представлява основната конфигурация за сигурност на приложението.
+// //HttpSecurity позволява детайлно конфигуриране на правилата за сигурност във приложението,
+// като контролира как се осъществява аутентикацията, авторизацията и други аспекти на сигурността.
+// Този обект предоставя методи за конфигуриране на различни аспекти на защитата на приложението, като настройка
+// на разрешенията за достъп до определени URL адреси, конфигуриране на формата за вход, обработка на изход и други.
+///Методът filterChain(HttpSecurity httpSecurity) връща SecurityFilterChain, който представлява конфигурацията
+// за филтриране на HTTP заявките.
+// Чрез метода authorizeHttpRequests се дефинират разрешения за достъп до различни URL адреси.
+// След това се конфигурира формата за вход и изход с .formLogin и .logout секциите.
+// Накрая, чрез .build() се създава и връща SecurityFilterChain.

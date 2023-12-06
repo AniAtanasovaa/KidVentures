@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface UserService {
 
-    void initRoles();
+
 
     void changeUserRole(String username, RoleEnum newRole);
 
@@ -31,5 +31,5 @@ public interface UserService {
     Optional<UserEntity> findById(Long authorId);
 
 
-    //ToDo да оправя да няма Никъде Mobilele - в head
+    boolean isUserTableNull();
 }

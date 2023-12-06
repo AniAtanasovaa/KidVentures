@@ -2,6 +2,7 @@ package defence.app.init;
 
 import defence.app.model.serviceModel.UserServiceModel;
 import defence.app.service.CategoryService;
+import defence.app.service.RoleService;
 import defence.app.service.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -13,16 +14,19 @@ public class InitDB implements CommandLineRunner {
 
     private final CategoryService categoryService;
 
-    public InitDB(UserService userService, CategoryService categoryService) {
+    private final RoleService roleService;
+
+    public InitDB(UserService userService, CategoryService categoryService, RoleService roleService) {
         this.userService = userService;
         this.categoryService = categoryService;
+        this.roleService = roleService;
     }
 
     @Override
     public void run(String... args) throws Exception {
 
 
-        this.userService.initRoles();
+        this.roleService.initRoles();
 
         if (!userService.isAdminUserExists()) {
 

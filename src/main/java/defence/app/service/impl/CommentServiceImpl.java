@@ -40,7 +40,6 @@ public class CommentServiceImpl implements CommentService {
     public CommentEntity createComment(NewCommentBindingModel newCommentBindingModel, String username, Long id) {
 
         CommentEntity commentEntity = modelMapper.map(newCommentBindingModel, CommentEntity.class);
-        commentEntity.setApproved(true);
         commentEntity.setCreated(LocalDateTime.now());
         commentEntity.setContent(newCommentBindingModel.getContent());
         PlaceEntity place = placeService.getPlaceById(id);

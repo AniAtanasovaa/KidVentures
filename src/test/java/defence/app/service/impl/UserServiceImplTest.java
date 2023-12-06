@@ -5,6 +5,7 @@ import defence.app.model.enums.RoleEnum;
 import defence.app.model.serviceModel.UserServiceModel;
 import defence.app.repository.RoleRepository;
 import defence.app.repository.UserRepository;
+import defence.app.service.RoleService;
 import defence.app.service.exception.ObjectNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,6 +33,9 @@ class UserServiceImplTest {
     private RoleRepository roleRepository;
 
     @Mock
+    private RoleService roleService;
+
+    @Mock
     private ApplicationEventPublisher applicationEventPublisher;
 
     @InjectMocks
@@ -48,7 +52,7 @@ class UserServiceImplTest {
         when(userRepository.count()).thenReturn(0L);
 
         // Извикване на тествания метод
-        userService.initRoles();
+       roleService.initRoles();
 
         // Проверка дали са били добавени ролите в репозиторията
         verify(roleRepository, times(RoleEnum.values().length)).save(any(RoleEntity.class));
