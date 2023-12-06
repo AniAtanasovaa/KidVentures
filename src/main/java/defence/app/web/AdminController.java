@@ -41,15 +41,4 @@ import org.springframework.web.bind.annotation.*;
         return "change";
     }
 
-//    @PostMapping("/change") // За REST CONTOLLER
-//    public ResponseEntity<String> changeUserRole(@ModelAttribute RoleChangeForm roleChangeForm) {
-//        try {
-//            userService.changeUserRole(roleChangeForm.getUsername(), roleChangeForm.getNewRole());
-//            return ResponseEntity.ok("Ролята е променена успешно");
-//        } catch (ObjectNotFoundException e) {
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-//        } catch (Exception e) {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Възникна грешка при смяна на ролята");
-//        }
-//    }
 }

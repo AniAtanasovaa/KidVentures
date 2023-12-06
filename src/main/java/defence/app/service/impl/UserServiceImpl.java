@@ -1,8 +1,6 @@
 package defence.app.service.impl;
-
 import defence.app.model.entity.RoleEntity;
 import defence.app.model.entity.UserEntity;
-
 import defence.app.model.enums.RoleEnum;
 import defence.app.model.serviceModel.UserServiceModel;
 import defence.app.repository.RoleRepository;
@@ -16,19 +14,16 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
-
 import java.util.Optional;
-//Todo при регистрация на потребител с данни, които вече са на друг потребител, не изкарва грешка, но полсе същият потребител, който лпреди е можел да се регистрира, вече не може дасе логне
 
 @Service
 public class UserServiceImpl implements UserService {
-    private final UserRepository userRepository;
+    private final UserRepository userRepository; // Използвам Репото, защото ако инжектирам сървиса,
+    // става кръгово извикване и се чупи
     private final PasswordEncoder passwordEncoder;
     private final RoleRepository roleRepository;
     private final ModelMapper modelMapper;
-
     private final ApplicationEventPublisher applicationEventPublisher;
-
 
     public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, RoleRepository roleRepository, ModelMapper modelMapper, ApplicationEventPublisher applicationEventPublisher) {
 
@@ -39,11 +34,9 @@ public class UserServiceImpl implements UserService {
         this.applicationEventPublisher = applicationEventPublisher;
     }
 
-
-
-
     @Override
     public void changeUserRole(String username, RoleEnum newRole) {
+
         Optional<UserEntity> userOptional = userRepository.findByUsername(username);
 
         if (userOptional.isPresent()) {
@@ -54,24 +47,35 @@ public class UserServiceImpl implements UserService {
 
             // Добавям новата роля
             Optional<RoleEntity> role = roleRepository.findByRole(newRole);
+
             RoleEntity newRoleEntity = role.orElseGet(() -> {
+
                 RoleEntity roleEntity = new RoleEntity(newRole);
+
                 return roleRepository.save(roleEntity);
             });
 
+//Методът orElseGet, връща стойността от Optional, ако тя съществува,
+// или генерира и връща стойност чрез подадена функция, ако няма такава стойност. Т.е. ако ролята
+// съществува (е намерена), role.orElseGet(...) връща съществуващата роля. И ако ролята не съществува,
+// тогава се изпълнява функцията, подадена като аргумент в orElseGet. Този блок код създава нова роля
+// (RoleEntity roleEntity = new RoleEntity(newRole))
+// с предоставеното име на ролята newRole и я записва в базата данни чрез roleRepository.save(roleEntity).
+
             user.getRoles().add(newRoleEntity);
 
-            // Запазваме ъпдейта на потребителя
+            // Запазвам ъпдейта на потребителя в базата
             userRepository.save(user);
+
         } else {
-            throw new ObjectNotFoundException("User not found with username: " + username);
+            throw new ObjectNotFoundException("Не е открит потребител с това потребителско име: " + username);
         }
 
     }
 
     @Override
     public long countUserRegistrationsForDate(LocalDate date) {
-        return  userRepository.countByRegistrationDate(date);
+        return userRepository.countByRegistrationDate(date);
     }
 
     @Override
@@ -79,28 +83,42 @@ public class UserServiceImpl implements UserService {
 
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        if (principal instanceof UserDetails) {
+        //SecurityContextHolder.getContext(): Взема текущия контекст на сигурност. SecurityContextHolder е клас в
+        // Spring Security, който предоставя механизъм за съхранение и достъп до информация за сигурността в
+        // рамките на текущия поток на изпълнение.
+
+        //getAuthentication(): Взема текущата аутентикация. Authentication представлява информацията за аутентикацията
+        // на текущия потребител, като напри. дали е аутентикиран, ролите, които притежава и т.н.
+
+        //getPrincipal(): Взема "основната" информация за аутентикацията, която обикновено представлява
+        // потребителската информация. В повечето случаи, това е обект от тип UserDetails или неговите наследници.
+
+        if (principal instanceof UserDetails) { //Проверявам дали стойността на principal е инстанция на UserDetails
 
             UserDetails userDetails = (UserDetails) principal;
-            // Предполагаме, че има поле username в UserDetails, което съдържа потребителското име
+
+//     ///Ако principal е инстанция на UserDetails, означава, че текущият потребител е успешно аутентикиран
+//     в системата и можем да извлечем допълнителна информация от UserDetails (напр. потребителското име)
+//      и да я използваме за взимане на информация за потребителя от базата дани - т.е трябва да имам поле username в UserDetails, което съдържа потребителското име
+
             String username = userDetails.getUsername();
 
-            // Връщаме информацията за текущия потребител от базата данни или друго хранилище
+            // Връщам информацията за текущия потребител от базата данни
             return userRepository.findByUsername(username);
         }
 
-        // Ако не успеем да вземем потребител, връщаме null или хвърляме изключение
+        // Ако не успеем да вземем потребител, връщаме null
         return null;
     }
 
 
-
     @Override
     public void registerUser(UserServiceModel userServiceModel) {
+        // Използвам UserServiceModel, като преходен обект, който събира и валидира входните данни,
+        //преди да се извърши операцията с базата данни, защото правя валидация на данните, преди те да бъдат
+        // изпратени към базата данни (чрез анотациите @NotBlank, @Size и пр.)
 
         userRepository.save(map(userServiceModel));
-
-
 
     }
 
@@ -148,7 +166,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean isUserTableNull() {
-        return userRepository.count()==0;
+        return userRepository.count() == 0;
     }
 
 
@@ -172,24 +190,23 @@ public class UserServiceImpl implements UserService {
         });
 
         adminEntity.setFirstName(adminUser.getFirstName())
-        .setLastName(adminUser.getLastName())
+                .setLastName(adminUser.getLastName())
                 .setEmail(adminUser.getEmail())
-        .setUsername(adminUser.getUsername())
-        .setPassword(passwordEncoder.encode(adminUser.getPassword()))
+                .setUsername(adminUser.getUsername())
+                .setPassword(passwordEncoder.encode(adminUser.getPassword()))
                 .getRoles().add(adminRole);
 
         adminEntity.getRoles().add(userRole);
-
 
 
         return adminEntity;
     }
 
     @Override
-    public UserEntity findByUsernameAndPassword(String username, String password) { //Todo да оправя да не връща ентити , а сървис мидел
+    public UserEntity findByUsernameAndPassword(String username, String password) {
 
 
-        return userRepository. findByUsernameAndPassword(username, password)
+        return userRepository.findByUsernameAndPassword(username, password)
 
                 .orElse(null);
     }

@@ -89,10 +89,10 @@ public class PlaceController {
 
         pictureService.setPlace(placeId, imageURL);
 
-        // Добавяне на коментар по подразбиране към новосъздаденото място
+        // Добавям коментара по подразбиране към новосъздаденото място
         commentService.createDefaultComment(placeId);
 
-          return "redirect:/place/" + placeId;
+        return "redirect:/place/" + placeId;
     }
 
     @GetMapping("/{id}")
@@ -112,8 +112,3 @@ public class PlaceController {
     }
 
 }
-
-
-
-
-

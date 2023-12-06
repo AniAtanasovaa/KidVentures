@@ -1,11 +1,10 @@
 package defence.app.model.serviceModel;
-
 import defence.app.model.entity.RoleEntity;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-public class UserServiceModel { //За да не използваме и разкарваме репото насам, натам
+public class UserServiceModel {
 
     private Long id;
     @NotBlank(message = "Името трябва да съдържа минимум 2 символа")

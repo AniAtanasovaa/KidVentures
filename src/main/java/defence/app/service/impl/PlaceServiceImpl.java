@@ -74,15 +74,15 @@ public class PlaceServiceImpl implements PlaceService {
     @Override
     public List<PlaceViewModel> findAllPlacesViewModel() {
 
-            return placeRepository
-                    .findAll()
-                    .stream()
-                    .map(placeEntity -> {
-                        PlaceViewModel placeViewModel = modelMapper.map(placeEntity, PlaceViewModel.class);
-                        return placeViewModel;
-                    })
-                    .collect(Collectors.toList());
-        }
+        return placeRepository
+                .findAll()
+                .stream()
+                .map(placeEntity -> {
+                    PlaceViewModel placeViewModel = modelMapper.map(placeEntity, PlaceViewModel.class);
+                    return placeViewModel;
+                })
+                .collect(Collectors.toList());
+    }
 
 
     @Override
@@ -104,8 +104,9 @@ public class PlaceServiceImpl implements PlaceService {
 
     @Override
     public List<PlaceViewModel> findPlacesByCategory(CategoryEntity category) {
-        // Тук извиквате вашите репозитории, за да намерите местата по категория
-        // Нека предположим, че имате метод в репозиторията, който връща списък с места по категория
+
+        // Извиквам репото, за да намеря местата по категория
+
         List<PlaceEntity> places = placeRepository.findByCategory(category);
 
         // Преобразуване на списъка с места в списък с PlaceViewModel
@@ -115,19 +116,19 @@ public class PlaceServiceImpl implements PlaceService {
     }
 
     private PlaceViewModel mapPlaceEntityToViewModel(PlaceEntity placeEntity) {
-        // Тук използвате modelMapper или ръчно мапване, за да преобразувате PlaceEntity в PlaceViewModel
-        // Примерно:
+
+        // Ръчно мапвам, за да преобразувам PlaceEntity в PlaceViewModel
+
         PlaceViewModel placeViewModel = new PlaceViewModel();
         placeViewModel.setName(placeEntity.getName());
         placeViewModel.setDescription(placeEntity.getDescription());
         placeViewModel.setCity(placeEntity.getCity());
         placeViewModel.setAddress(placeEntity.getAddress());
         placeViewModel.setPicture(placeEntity.getPicture());
-        // Добавете останалата информация, която искате да прехвърлите
+
 
         return placeViewModel;
     }
 
 
 }
-

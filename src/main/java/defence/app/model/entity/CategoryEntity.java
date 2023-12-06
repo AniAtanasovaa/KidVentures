@@ -1,8 +1,6 @@
 package defence.app.model.entity;
-
 import defence.app.model.enums.CategoryEnum;
 import jakarta.persistence.*;
-
 import java.util.List;
 
 @Entity

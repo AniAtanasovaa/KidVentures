@@ -1,5 +1,4 @@
 package defence.app.model.bindingModel;
-
 import defence.app.model.enums.RoleEnum;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

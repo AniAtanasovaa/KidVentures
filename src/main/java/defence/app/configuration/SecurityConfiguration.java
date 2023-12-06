@@ -60,11 +60,18 @@ public class SecurityConfiguration {
                 .build();
     }
 
-    @Bean
+    @Bean //@Bean анотацията се използва за маркиране на метод, който създава и връща обект, който ще бъде
+    // управляван от Spring контейнера. В случая, методът създава UserDetailsService обект,
+    // който ще бъде използван за аутентикация на потребителите.
     public UserDetailsService userDetailsService(UserRepository userRepository) {
-        //// This service translates the users and roles
-        //    // to representation which spring security understands.
-        return new ApplicationUserDetailsService(userRepository);
+
+        //Тази услуга превежда потребителите и ролите към представяне, което Spring сигурността разбира.
+        //Методът връща обект от тип ApplicationUserDetailsService. Този обект ще бъде инжектиран от Spring
+        // контейнера в приложението, където е необходимо извличане на информация за потребителите
+        // при аутентикация.
+
+        return new ApplicationUserDetailsService(userRepository);//Този клас представлява конкретна имплементация
+        // на UserDetailsService
     }
 
     @Bean

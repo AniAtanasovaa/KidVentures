@@ -61,9 +61,8 @@ public class CommentServiceImpl implements CommentService {
     public void createDefaultComment(Long placeId) {
         // Създаване на коментар по подразбиране
         NewCommentBindingModel defaultComment = new NewCommentBindingModel();
-        defaultComment.setContent(".");
+        defaultComment.setContent("Чудесно място за забавление за деца");
 
-        // Заместете "admin" със съществуващо потребителско име в системата
         String defaultUsername = "admin";
 
         // Създаване на коментара в базата данни

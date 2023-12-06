@@ -1,21 +1,15 @@
 package defence.app.model.bindingModel;
-
 import defence.app.model.entity.UserEntity;
 import defence.app.model.enums.CategoryEnum;
-
-
 import jakarta.validation.constraints.NotBlank;
-
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-
-
 public class CreatePlaceBindingModel {
-
     @NotBlank(message = "Моля, въведете град.")
     @Size(min=2, max=20, message = "Името на градът трябва да е между 2 и 20 символа.")
     private String city;
+
     @NotBlank(message = "Моля, въведете адрес.")
     @Size(min=2, max=20, message = "Дължината на адресът трябва да е между 2 и 20 символа.")
     private String address;
@@ -28,19 +22,12 @@ public class CreatePlaceBindingModel {
     @Size(min=2, max=150, message = "Описанието на мястото трябва да е между 2 и 150 символа.")
     private String description;
 
-
     @NotNull(message = "Моля, изберете категория.")
     private CategoryEnum category = CategoryEnum.ВЪТРЕ;
-
     private UserEntity author;
-
-//    @NotEmpty( message = "Моля, качете снимка.")
-
     private String imageURL;
-
     public CreatePlaceBindingModel() {
     }
-
     public CreatePlaceBindingModel(String city, String address, String name, String description,CategoryEnum category, UserEntity author, String imageURL) {
         this.city = city;
         this.address = address;

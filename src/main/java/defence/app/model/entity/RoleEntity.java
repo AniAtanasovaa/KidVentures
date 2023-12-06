@@ -1,5 +1,4 @@
 package defence.app.model.entity;
-
 import defence.app.model.enums.RoleEnum;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

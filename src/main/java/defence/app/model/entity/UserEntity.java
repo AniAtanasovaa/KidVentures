@@ -1,14 +1,8 @@
 package defence.app.model.entity;
-
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashSet;
-
 import java.util.List;
-import java.util.Set;
-//Todo да оправя да дава съобщение при използван email ??? или вече имам?
 @Entity
 @Table(name = "users")
 public class UserEntity extends BaseEntity{

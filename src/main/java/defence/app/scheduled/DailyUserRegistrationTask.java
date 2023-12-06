@@ -1,13 +1,12 @@
 package defence.app.scheduled;
-
 import defence.app.model.entity.DailyStatisticsEntity;
 import defence.app.repository.DailyStatisticsRepository;
 import defence.app.service.UserService;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-
 import java.time.LocalDate;
-
+ //Използвам класа за планиране на задачи в Spring (@Scheduled) за регистриране на статистика за ежедневните
+ // регистрации на потребители.
 @Component
 public class DailyUserRegistrationTask {
 
@@ -24,13 +23,20 @@ public class DailyUserRegistrationTask {
 
     @Scheduled(cron = "0 33 23 * * ?")
     public void recordDailyUserRegistrations() {
+
+        //метода ми маркиран с анотацията @Scheduled ще се изпълнява периодично според зададения cron израз.
+        // В случая, израза означава "всеки ден в 23:33".
+
         LocalDate today = LocalDate.now();
         long dailyUserRegistrations = userService.countUserRegistrationsForDate(today);
+        //Извиквам userService.countUserRegistrationsForDate(today), за да получа броят на регистрираните потребители
+        // за текущата дата (today).
 
         saveDailyStatistics(today, dailyUserRegistrations);
+        //    Извиква метода saveDailyStatistics(today, dailyUserRegistrations), който записва този брой в базата данни
+        //    под формата на DailyStatisticsEntity.
 
-        // Тук можете да извършите допълнителна логика, като например записване на броя в лог файла или базата данни.
-        System.out.println("Daily user registrations on " + today + ": " + dailyUserRegistrations);
+        System.out.println("Брой регистрирани потребители на дата: " + today + ": " + dailyUserRegistrations);
     }
 
     public void saveDailyStatistics(LocalDate date, long dailyUserRegistrations) {
