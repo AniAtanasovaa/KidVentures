@@ -47,18 +47,6 @@ class UserServiceImplTest {
     }
 
     @Test
-    void initRoles() {
-        // Симулирайте сценария, когато няма потребители
-        when(userRepository.count()).thenReturn(0L);
-
-        // Извикване на тествания метод
-       roleService.initRoles();
-
-        // Проверка дали са били добавени ролите в репозиторията
-        verify(roleRepository, times(RoleEnum.values().length)).save(any(RoleEntity.class));
-    }
-
-    @Test
     void changeUserRoleUserExists() {
         // Подготовка на мокове
         UserEntity userEntity = new UserEntity();

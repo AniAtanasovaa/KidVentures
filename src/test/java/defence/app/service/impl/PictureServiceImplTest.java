@@ -90,7 +90,7 @@ class PictureServiceImplTest {
         when(userService.findFirstByUsername("admin")).thenReturn(new UserEntity());
 
         // Извикване на метода, който тестваме
-        pictureService.setPlaceAndAuthor(1L, "testUrl","admin");
+        pictureService.setPlace(1L, "testUrl");
 
         // Проверка дали методът setPlace() вика pictureRepository.saveAndFlush() със създаден PictureEntity
         verify(pictureRepository, times(1)).saveAndFlush(any(PictureEntity.class));

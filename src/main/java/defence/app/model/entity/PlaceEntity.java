@@ -15,7 +15,7 @@ public class PlaceEntity extends BaseEntity {
     @Column(nullable = false, unique = true)
     private String name;
 
-    @Column(nullable = false,  columnDefinition = "TEXT")
+    @Column(nullable = false)
     private String description;
 
     @ManyToOne

@@ -33,9 +33,6 @@ class CommentServiceImplTest {
     private CommentEntity comment;
     @Mock
     private CommentRepository testCommentRepository;
-    @Mock
-    private PictureRepository pictureRepository;
-
     private ModelMapper modelMapper;
     @Mock
     private UserService testUserService;
@@ -67,7 +64,7 @@ class CommentServiceImplTest {
         testCommentRepository = mock(CommentRepository.class); // Инициализация с Mockito
         commentService = new CommentServiceImpl(testCommentRepository, modelMapper, testUserService, testPlaceService);
         testUserService = new UserServiceImpl(userRepository, passwordEncoder, roleRepository, modelMapper, applicationEventPublisher);
-        testPlaceService = new PlaceServiceImpl(placeRepository, modelMapper, testUserService, categoryService, testCommentRepository, pictureRepository);
+        testPlaceService = new PlaceServiceImpl(placeRepository, modelMapper, testUserService, categoryService, testCommentRepository);
         categoryService = new CategoryServiceImpl(categoryRepository);
 
         // Инициализация на валиден CommentEntity
@@ -125,7 +122,7 @@ class CommentServiceImplTest {
 
         NewCommentBindingModel newCommentBindingModel = new NewCommentBindingModel();
 
-        String content = ".";
+        String content = "Чудесно място за забавление за деца";
 
         newCommentBindingModel.setContent(content);
 
