@@ -10,53 +10,31 @@
 <div>
     <nav th:replace="~{fragments/navbar}"></nav>
 </div>
-
 <div class="container">
-    <h2 class="text-center text-white">Детайли</h2>
-
     <div th:object="${place}" class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center" data-place-id="${place.id}">
-
         <div class="box">
             <div th:text="${place.getSummary()}" style="white-space: pre-line;"> </div>
         </div>
-
         <div style="text-align: center">
             <img style="height: 200px; width: 300px" th:src="${imageURL}" alt="Снимка">
         </div>
     </div>
 
-    <div id="comments-container" class="boxes about_container">
-
-        <div class="box" th:each="comment : ${comments}">
-            <p th:text="${comment.content}"></p>
-        </div>
-    </div>
-
-    <form th:method="post" th:action="@{/comments/place/{placeId}(placeId=${place.id})}" th:object="${newCommentBindingModel}"
-          class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
-
-        <label for="comment">Коментар:</label>
-        <textarea id="comment" name="content" class="font-weight-bold"></textarea>
-
-        <button type="submit">Зареди</button>
-    </form>
+    <!-- Бутон за зареждане на коментарите -->
+    <a th:href="@{/comments/place/{placeId}(placeId=${place.id})}" class="btn btn-info btn-lg justify-content-center">Зареди коментарите</a>
 
     <span class="nav-item text-center" sec:authorize="hasRole('ADMIN')">
-
         <div class="button-delete ">
-            <form th:method="delete"
-                  th:action="@{/place/{id}(id=*{id})}">
+            <form th:method="delete" th:action="@{/place/{id}(id=*{id})}">
                 <input type="submit" value="Изтрий" class="btn btn-info btn-lg justify-content-center"/>
             </form>
         </div>
-
     </span>
 
     <div class="text-center">
         <br>
         <a href="/" class="fun-about"><h2>Заповядайте в основното меню...</h2></a>
     </div>
-
 </div>
 
 </body>

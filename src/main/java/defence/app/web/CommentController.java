@@ -52,7 +52,7 @@ public class CommentController {
         model.addAttribute("comments", comments);
         model.addAttribute("newCommentBindingModel", new NewCommentBindingModel());
 
-        return "details";
+        return "comments :: commentsFragment";
     }
 
     @PostMapping("/comments/place/{placeId}")

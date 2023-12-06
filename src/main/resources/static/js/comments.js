@@ -1,40 +1,39 @@
+// Променете функцията loadCommentsForPlace да използва jQuery
 async function loadCommentsForPlace(placeId) {
-    try {
-        // Запазване на URL на изображението преди актуализацията
-        const imageUrl = document.querySelector('[data-place-id]').querySelector('img').src;
-
-        // Зареждане на коментарите
-        const response = await fetch(`/comments/place/${placeId}`, {
-            method: 'GET',
-            headers: {
-                'Accept': 'text/html',
-            },
-        });
-        const data = await response.text();
-
-        const commentsContainer = document.getElementById("comments-container");
-        if (commentsContainer) {
-            if (data.trim() !== "") {
-                commentsContainer.innerHTML = data;
-
-                // Възстановяване на изображението след актуализацията
-                document.querySelector('[data-place-id]').querySelector('img').src = imageUrl;
-            } else {
-                console.log("No comments available.");
-            }
-        } else {
-            console.error("comments-container not found in the DOM");
+    $.ajax({
+        type: 'GET',
+        url: '/comments/place/' + placeId,
+        success: function(data) {
+            $('#comments-container').html(data);
+        },
+        error: function(error) {
+            console.error('Error loading comments:', error);
         }
-    } catch (error) {
-        console.error("Error loading comments:", error);
-    }
+    });
 }
 
-document.querySelector("form").addEventListener("submit", async function (e) {
+// Обработчик за бутона за зареждане на коментарите
+$('#load-comments-btn').on('click', function () {
+    const placeId = $(this).data('place-id');
+    console.log("Loading comments for place ID:", placeId);
+    loadCommentsForPlace(placeId);
+});
+
+// Изпълнение на заявката при зареждане на страницата
+$(document).ready(function() {
+    const placeId = document.querySelector('[data-place-id]').getAttribute('data-place-id');
+    loadCommentsForPlace(placeId);
+});
+
+// Добавете този ред за съхранение на URL на изображението в #comments-container
+$('#comments-container').data('image-url', $('[data-place-id]').find('img').attr('src'));
+
+// Изпълнение на заявката при добавяне на коментар
+$('form').submit(async function(e) {
     e.preventDefault();
     const placeId = this.closest('[data-place-id]').getAttribute('data-place-id');
-    console.log("Adding comment...");
-    await fetch(`/comments/place/${placeId}`, {
+    console.log('Adding comment...');
+    await fetch('/comments/place/' + placeId, {
         method: 'POST',
         headers: {
             'Accept': 'text/html',
@@ -44,13 +43,12 @@ document.querySelector("form").addEventListener("submit", async function (e) {
     });
 
     // След като добавим коментар, зареждаме отново коментарите
-    console.log("Comment added. Loading comments...");
+    console.log('Comment added. Loading comments...');
     loadCommentsForPlace(placeId);
 });
 
-// Зареждане на коментарите при зареждане на страницата
-document.addEventListener("DOMContentLoaded", function () {
-    const placeId = document.querySelector('[data-place-id]').getAttribute('data-place-id');
-    console.log("Loading comments on page load...");
-    loadCommentsForPlace(placeId);
+// Обработчик за бутона за добавяне на коментар
+$('#add-comment-btn').on('click', function () {
+    // Покажете формата за добавяне на коментар
+    $('form').show();
 });
