@@ -6,8 +6,6 @@ import defence.app.model.enums.RoleEnum;
 import defence.app.repository.RoleRepository;
 import defence.app.repository.UserRepository;
 import defence.app.service.UserService;
-import defence.app.service.exception.ObjectNotFoundException;
-import defence.app.web.AdminController;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
