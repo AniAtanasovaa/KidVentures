@@ -13,6 +13,10 @@ public class UploadPictureServiceImpl implements UploadPictureService { //Тоз
     // изображение в облачното хранилище Cloudinary и създава съответния обект за представяне на изображението
     // в базата данни.
 
+    //MultipartFile е интерфейс в рамките на Spring Framework, който предоставя стандартизиран начин за
+    // представяне на файл, който е получен през HTTP мултипарт (HTTP multipart requests).
+    // Този интерфейс е част от пакета org.springframework.web.multipart, и се използва за обработка на файлове,
+    // качени от клиентската страна, например чрез HTML форми с enctype="multipart/form-data".
     private final Cloudinary cloudinary;
     private final PictureService pictureService;
 
@@ -22,8 +26,7 @@ public class UploadPictureServiceImpl implements UploadPictureService { //Тоз
     }
 
     @Override
-    public String uploadPictureFile(MultipartFile multipartFile) throws IOException { //MultipartFile е обект, който представлява файловете,
-        // изпратени чрез HTTP заявка
+    public String uploadPictureFile(MultipartFile multipartFile) throws IOException {
 
         String url = cloudinary.uploader()
                 .upload(multipartFile.getBytes(),

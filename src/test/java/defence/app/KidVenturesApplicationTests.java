@@ -22,7 +22,7 @@ class KidVenturesApplicationTests {
 
 	@Test
 	void testHomePage() throws Exception {
-		mockMvc.perform(get("/"))  // Можете да замените "/" с пътя на вашата начална страница
+		mockMvc.perform(get("/"))
 				.andExpect(status().isOk());  // Проверка за успешен HTTP отговор (200 OK)
 	}
 

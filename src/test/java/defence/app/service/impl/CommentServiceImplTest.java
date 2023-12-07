@@ -61,18 +61,16 @@ class CommentServiceImplTest {
     @BeforeEach
     void setUp() {
         modelMapper = new ModelMapper();
-        testCommentRepository = mock(CommentRepository.class); // Инициализация с Mockito
+        testCommentRepository = mock(CommentRepository.class); // Инициализацирам с Mockito
         commentService = new CommentServiceImpl(testCommentRepository, modelMapper, testUserService, testPlaceService);
         testUserService = new UserServiceImpl(userRepository, passwordEncoder, roleRepository, modelMapper, applicationEventPublisher);
         testPlaceService = new PlaceServiceImpl(placeRepository, modelMapper, testUserService, categoryService, testCommentRepository);
         categoryService = new CategoryServiceImpl(categoryRepository);
 
-        // Инициализация на валиден CommentEntity
+        // Инициализирам валиден CommentEntity
         comment = new CommentEntity();
         comment.setContent("Примерно съдържание");
-        // Задайте и други необходими полета...
 
-        // Ако вашият CommentEntity има връзки като PlaceEntity и UserEntity, уверете се, че ги инициализирате съответно.
         comment.setPlace(new PlaceEntity());
         comment.setAuthor(new UserEntity());
     }
@@ -95,9 +93,17 @@ class CommentServiceImplTest {
 
         // Assert
         ArgumentCaptor<CommentEntity> commentEntityArgumentCaptor = ArgumentCaptor.forClass(CommentEntity.class);
+        //създава ArgumentCaptor, който е част от библиотеката Mockito. Този обект се използва за хващане (capturing)
+        // на аргументите, които са предадени при извикването на метод, който се мокира (mock) или стъбва (stub)
+        // с Mockito.
 
         // Проверявам само за извикване на save метода на репозиторито
         verify(testCommentRepository, times(1)).save(any(CommentEntity.class));
+
+        //В конкретния случай, коментара се създава чрез commentService.createComment(newCommentBindingModel, "Ani", 1L)
+        // Тъй като репозиторито (testCommentRepository) е мокнато, се очаква да се извика метода save на репозиторито
+        // с параметър от тип CommentEntity.
+        //ArgumentCaptor се използва след това, за да хване (capturing) този параметър и да може да се направят допълнителни проверки върху него.
 
         // Извличам аргумента, подаден на save метода, за допълнителни проверки
         verify(testCommentRepository, times(1)).save(commentEntityArgumentCaptor.capture());

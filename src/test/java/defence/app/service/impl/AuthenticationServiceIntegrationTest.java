@@ -21,14 +21,15 @@ public class AuthenticationServiceIntegrationTest {
     @Test
     void testGetLoggedInUser() {
         // Arrange
-        UserEntity expectedUser = new UserEntity();
+        UserEntity expectedUser = new UserEntity(); //Създава се обект от тип UserEntity, представляващ очаквания резултат от метода getLoggedInUser
         expectedUser.setId(1L);
-        Authentication authentication = mock(Authentication.class);
-        when(authentication.getPrincipal()).thenReturn(expectedUser);
+        Authentication authentication = mock(Authentication.class); //Създава се мок обект Authentication, който ще бъде върнат от SecurityContextHolder.
+    when(authentication.getPrincipal()).thenReturn(expectedUser); //Указва се, че при извикване на authentication.getPrincipal(), ще се върне създадения UserEntity.
 
         SecurityContext securityContext = mock(SecurityContext.class);
         when(securityContext.getAuthentication()).thenReturn(authentication);
-        SecurityContextHolder.setContext(securityContext);
+        SecurityContextHolder.setContext(securityContext); //Създава се мок на SecurityContext, който при извикване на securityContext.getAuthentication() връща мока Authentication.
+       // SecurityContextHolder се конфигурира да връща създадения SecurityContext
 
         // Act
         UserEntity actualUser = authenticationService.getLoggedInUser();
@@ -40,7 +41,7 @@ public class AuthenticationServiceIntegrationTest {
     @Test
     void testGetLoggedInUserWhenNotAuthenticated() {
         // Arrange
-        SecurityContextHolder.clearContext();
+        SecurityContextHolder.clearContext(); //Изчиства се SecurityContextHolder, симулирайки липса на аутентикация.
 
         // Act
         UserEntity actualUser = authenticationService.getLoggedInUser();

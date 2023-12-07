@@ -75,7 +75,7 @@ public class CommentControllerTest {
         String result = commentController.getCommentsForPlace(placeId, model, redirectAttributes);
 
         // Assert
-        assertEquals("details", result);
+        assertEquals("comments :: commentsFragment", result);
         verify(model).addAttribute(eq("place"), eq(placeEntity));
         verify(model).addAttribute(eq("comments"), eq(comments));
         verify(model).addAttribute(eq("newCommentBindingModel"), any(NewCommentBindingModel.class));

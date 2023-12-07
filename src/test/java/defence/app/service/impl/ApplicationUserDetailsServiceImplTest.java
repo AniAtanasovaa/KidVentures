@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
-@ExtendWith(MockitoExtension.class)
+@ExtendWith(MockitoExtension.class) //Аннотацията @ExtendWith(MockitoExtension.class) се използва за интегриране на Mockito с JUnit 5 тестовете.
 public class ApplicationUserDetailsServiceImplTest {
 
 
@@ -35,18 +35,22 @@ public class ApplicationUserDetailsServiceImplTest {
     }
 
     @Test
-    void testUserNotFound() {
+    void testUserNotFound() { //Този тест проверява дали се хвърля изключение от тип UsernameNotFoundException,
+        // когато потребителят не е намерен в репозиторито.
 
         Assertions.assertThrows(UsernameNotFoundException.class, ()->
                 testApplicationUserDetailsService.loadUserByUsername("albena"));
     }
 
     @Test
-    void testUserFoundException() {
+    void testUserFound() {
 
 
         // Arrange - подговотка на тестовите данни т.е. в случая са 1 ново UserEntity
         UserEntity testUserEntity = createTestUser();
+
+//   Създава се тестов UserEntity и се подготвя резултата от репозиторито чрез Mockito.
+//   Когато се извика findByUsername със съответното потребителско име, той ще върне Optional.of(testUserEntity).
 
         when(mockUserRepository.findByUsername(testUserEntity.getUsername()))
                 .thenReturn(Optional.of(testUserEntity));
@@ -54,10 +58,14 @@ public class ApplicationUserDetailsServiceImplTest {
         // Act - Взимаме това, което тестваме
         UserDetails userDetails =
                testApplicationUserDetailsService.loadUserByUsername(testUserEntity.getUsername());
+        //Методът loadUserByUsername на ApplicationUserDetailsServiceImpl се извиква със съответното
+        // потребителско име, и връща обект от тип UserDetails
 
 
         // Assert
+        //AssertNotNull проверява дали върнатият UserDetails обект не е null
        Assertions.assertNotNull(userDetails);
+
         assertEquals( // Първи аргумент - това, което очакваме,
                 // 2ри  аргумент - това, което реално е дошло, 3ти  аргумент (опционален) - съобщение за грешка
                 testUserEntity.getUsername(),

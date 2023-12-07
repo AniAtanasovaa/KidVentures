@@ -68,10 +68,10 @@ class UserServiceImplTest {
         // Сценарий, когато потребителят не съществува
         when(userRepository.findByUsername("nonexistentUser")).thenReturn(Optional.empty());
 
-        // Извикване на тествания метод и проверка за хвърлено изключение
+        // Извиквам тествания метод и проверка за хвърлено изключение
         assertThrows(ObjectNotFoundException.class, () -> userService.changeUserRole("nonexistentUser", RoleEnum.ADMIN));
 
-        // Уверете се, че потребителят не е бил запазен
+        // Уверявам се, че потребителят не е бил запазен
         verify(userRepository, never()).save(any(UserEntity.class));
     }
 

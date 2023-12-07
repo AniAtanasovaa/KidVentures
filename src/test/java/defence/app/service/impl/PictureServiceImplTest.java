@@ -50,11 +50,11 @@ class PictureServiceImplTest {
 
     @Test
     void savePicture() {
-        // Мокиране на pictureRepository за да не върши нищо при извикване на метода savePicture()
+
         PictureEntity pictureEntity = new PictureEntity();
         pictureService.savePicture(pictureEntity);
 
-        // Проверка дали методът savePicture() не вика pictureRepository.save()
+        // Проверка дали методът savePicture() вика pictureRepository.save()
         verify(pictureRepository, times(1)).save(pictureEntity);
     }
 

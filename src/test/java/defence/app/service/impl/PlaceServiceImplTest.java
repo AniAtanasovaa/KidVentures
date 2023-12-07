@@ -55,7 +55,7 @@ class PlaceServiceImplTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this);
-    }
+    } //метода инициализира mock обекти, които са анотирани с @Mock и инжектира тези mock обекти в тестовия клас.
 
     @Test
     void addPlace() {
@@ -104,6 +104,8 @@ class PlaceServiceImplTest {
 
         // Мокиране на modelMapper за да върне стойности при извикване на метода map()
         when(modelMapper.map(any(), eq(PlaceViewModel.class))).thenReturn(new PlaceViewModel());
+        // при извикване на метода map на modelMapper с каквито и да било аргументи (с any()), и втория аргумент,
+        // който е от тип PlaceViewModel.class (с eq(PlaceViewModel.class)), ще бъде върнат нов обект от тип PlaceViewModel.
 
         // Извикване на метода, който тестваме
         List<PlaceViewModel> result = placeService.findAllPlacesViewModel();
@@ -129,8 +131,11 @@ class PlaceServiceImplTest {
 
     @Test
     void getAllPlaces() {
-        Pageable pageable = mock(Pageable.class);
+
+        Pageable pageable = mock(Pageable.class); //Създавам мок обект на интерфейса Pageable
         when(placeRepository.findAll(pageable)).thenReturn(new PageImpl<>(Arrays.asList(new PlaceEntity(), new PlaceEntity())));
+//Задава се поведението на placeRepository, когато се извика методът findAll с предоставения pageable.
+// Се очаква да бъде върнат обект от тип PageImpl, съдържащ два елемента (Arrays.asList(new PlaceEntity(), new PlaceEntity())).
 
         when(modelMapper.map(any(), eq(PlaceViewModel.class))).thenReturn(new PlaceViewModel());
 
@@ -143,6 +148,7 @@ class PlaceServiceImplTest {
 
     @Test
     void getPlaceById() {
+
         Long placeId = 1L;
         PlaceEntity placeEntity = new PlaceEntity();
         when(placeRepository.findById(placeId)).thenReturn(Optional.of(placeEntity));
@@ -154,3 +160,6 @@ class PlaceServiceImplTest {
         assertEquals(placeEntity, result);
     }
 }
+
+//Мокирането се извършва чрез библиотеката Mockito и цели да подмени реалния обект (в случая modelMapper)
+// с мок обект, който има предопределено поведение.

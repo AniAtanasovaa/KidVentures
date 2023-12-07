@@ -16,16 +16,16 @@ import static org.mockito.Mockito.*;
 
 class DailyUserRegistrationTaskTest {
 
-    @Mock
+    @Mock //Използва се за създаване на мок обекти, които ще заменят реалните обекти в тестовете.
     private UserService userService;
 
     @Mock
     private DailyStatisticsRepository dailyStatisticsRepository;
 
-    @InjectMocks
+    @InjectMocks //Използва се за инжектиране на мок обекти в обекта, който тестваме.
     private DailyUserRegistrationTask dailyUserRegistrationTask;
 
-    @BeforeEach
+    @BeforeEach //Анотация, която обозначава метод, който се изпълнява преди всеки тест. В този случай, се инициализират мок обектите.
     void setUp() {
         MockitoAnnotations.initMocks(this);
     }
@@ -37,16 +37,23 @@ class DailyUserRegistrationTaskTest {
 
         // Подготвяме мокове и заявки
         when(userService.countUserRegistrationsForDate(today)).thenReturn(dailyUserRegistrations);
-        dailyUserRegistrationTask.recordDailyUserRegistrations();
+        //Конфигурира мок обекта userService да върне стойността на dailyUserRegistrations,
+        // когато се извика метода
+
+        dailyUserRegistrationTask.recordDailyUserRegistrations(); //Извиква метода,
+        // който води статистика за дневните регистрации.
 
         // Хващаме аргумента, който се подава на save метода
         ArgumentCaptor<DailyStatisticsEntity> captor = ArgumentCaptor.forClass(DailyStatisticsEntity.class);
         verify(dailyStatisticsRepository, times(1)).save(captor.capture());
+//Проверява дали методът save на мок обекта dailyStatisticsRepository е бил извикан точно веднъж
+// и хваща аргумента, който се е подавал при извикването му.
+
 
         // Проверяваме дали аргументът има правилните стойности
         DailyStatisticsEntity capturedEntity = captor.getValue();
-        assertEquals(today, capturedEntity.getDate());
-        assertEquals(dailyUserRegistrations, capturedEntity.getDailyRegistrations());
+        assertEquals(today, capturedEntity.getDate()); //Проверява дали датата на записаната събитие в статистиката съвпада с текущата дата.
+        assertEquals(dailyUserRegistrations, capturedEntity.getDailyRegistrations()); //Проверява дали броят регистрации в статистиката е съвпада с очаквания.
     }
     @Test
     void saveDailyStatistics() {
@@ -58,6 +65,8 @@ class DailyUserRegistrationTaskTest {
         existingDailyStatistics.setDate(date);
 
         when(dailyStatisticsRepository.findByDate(date)).thenReturn(existingDailyStatistics);
+        //Конфигурация на мок обекта dailyStatisticsRepository да върне съществуваща статистика,
+        // когато се извика метода findByDate с аргумент date.
 
         // Извикваме метода, който тестваме
         dailyUserRegistrationTask.saveDailyStatistics(date, dailyUserRegistrations);
@@ -72,3 +81,6 @@ class DailyUserRegistrationTaskTest {
         assertEquals(dailyUserRegistrations, capturedEntity.getDailyRegistrations());
     }
 }
+
+//ArgumentCaptor е инструмент в библиотеката Mockito, който се използва в тестовете, за да хване (capture) стойностите, подавани към методите по време на тест.
+//Когато искате да проверите какви аргументи са били подадени при извикването на определен метод, можете да използвате ArgumentCaptor, за да ги хванете и да извлечете техните стойности за по-нататъшна проверка.

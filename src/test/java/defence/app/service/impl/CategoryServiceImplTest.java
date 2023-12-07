@@ -67,7 +67,7 @@ class CategoryServiceImplTest {
         // Arrange
         CategoryEntity outside = new CategoryEntity().setName(CategoryEnum.НАВЪН);
 
-        // Направете mock за резултата на findByName да връща outside
+        // Правим mock за резултата на findByName да връща outside
         when(testCategoryRepository.findByName(CategoryEnum.НАВЪН)).thenReturn(Optional.of(outside));
 
         // Act
