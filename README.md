@@ -21,30 +21,6 @@ Copy code
 ./mvnw spring-boot:run
 Отворете браузъра си и посетете http://localhost:8080
 
-Структура на проекта
-css
-Copy code
-KidVentures/
-├── src/
-│   ├── main/
-│   │   ├── java/
-│   │   │   └── [пакет с вашия код]
-│   │   └── resources/
-│   │       ├── static/
-│   │       │   ├── images/
-│   │       │   └── css/
-│   │       └── templates/
-│   │           └── [Thymeleaf HTML файлове]
-│   └── test/
-│       └── java/
-├── target/
-├── .gitignore
-├── mvnw
-├── mvnw.cmd
-├── pom.xml
-└── README.md
-
-Save to grepper
 Инструкции за участие
 Клонирайте хранилището: git clone https://github.com/[вашето-потребителско-име]/KidVentures.git
 Направете промени.
