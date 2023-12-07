@@ -1,2 +1,55 @@
-# KidVentures
-This is my kidVentures project
+KidVentures е уеб приложение, създадено с цел улесняване на родителите при търсенето и добавянето на подходящи места за забавление с техните деца.
+
+Описание на проекта
+KidVentures е написан на Java и използва следните технологии: Spring Boot, Thymeleaf, MySQL, HTML, CSS, и JavaScript.
+
+Функционалности
+Добавяне на места: Родителите могат да добавят нови места, които са подходящи за забавление с деца.
+Преглеждане на места: Всички потребители могат да преглеждат списък с наличните обекти.
+Филтриране по категории: Потребителите могат да филтрират местата по различни категории като "На закрито," "На открито," и "С животни."
+
+Как да стартирате приложението
+Клониране на хранилището:
+bash
+Copy code
+git clone https://github.com/[вашето-потребителско-име]/KidVentures.git
+cd KidVentures
+Стартиране на Spring Boot приложението:
+
+bash
+Copy code
+./mvnw spring-boot:run
+Отворете браузъра си и посетете http://localhost:8080
+
+Структура на проекта
+css
+Copy code
+KidVentures/
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   └── [пакет с вашия код]
+│   │   └── resources/
+│   │       ├── static/
+│   │       │   ├── images/
+│   │       │   └── css/
+│   │       └── templates/
+│   │           └── [Thymeleaf HTML файлове]
+│   └── test/
+│       └── java/
+├── target/
+├── .gitignore
+├── mvnw
+├── mvnw.cmd
+├── pom.xml
+└── README.md
+
+Save to grepper
+Инструкции за участие
+Клонирайте хранилището: git clone https://github.com/[вашето-потребителско-име]/KidVentures.git
+Направете промени.
+Предложете промени: git push origin main
+Създайте pull request.
+
+Лиценз
+Този проект е лицензиран с лиценз на MIT.
