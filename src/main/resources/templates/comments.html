@@ -16,16 +16,6 @@
     </div>
 </div>
 
-<form th:method="post" th:action="@{/comments/place/{placeId}(placeId=${place.id})}" th:object="${newCommentBindingModel}"
-      class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
-
-    <label for="comment">Коментар:</label>
-    <textarea id="comment" name="content" class="font-weight-bold"></textarea>
-
-    <button type="submit">Добави коментар</button>
-
-</form>
-
 </body>
 
 </html>

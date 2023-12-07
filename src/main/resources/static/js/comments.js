@@ -1,10 +1,11 @@
-// Променете функцията loadCommentsForPlace да използва jQuery
 async function loadCommentsForPlace(placeId) {
     $.ajax({
         type: 'GET',
         url: '/comments/place/' + placeId,
         success: function(data) {
             $('#comments-container').html(data);
+            // Покажете формата за добавяне на коментар
+            $('form').show();
         },
         error: function(error) {
             console.error('Error loading comments:', error);
