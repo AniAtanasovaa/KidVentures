@@ -77,4 +77,10 @@ public class CommentController {
 //        return "redirect:/place/" + placeId;
         return "redirect:/comments/place/{placeId}";
     }
+
+    @DeleteMapping("/comments/delete/{commentId}")
+    public String deleteComment(@PathVariable Long commentId) {
+        commentService.deleteComment(commentId);
+        return "redirect:/";  // Пренасочване към основната страница или друга страница, според вашите изисквания
+    }
 }

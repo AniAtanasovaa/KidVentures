@@ -13,5 +13,7 @@ public interface CommentService {
 
     List<CommentViewModel> getAllCommentsForPlace(Long placeId);
     void createDefaultComment(Long placeId);
+    void deleteComment(Long commentId);
+
 
 }

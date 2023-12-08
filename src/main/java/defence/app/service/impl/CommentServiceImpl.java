@@ -68,5 +68,10 @@ public class CommentServiceImpl implements CommentService {
         // Създаване на коментара в базата данни
         createComment(defaultComment, defaultUsername, placeId);
     }
+
+    @Override
+    public void deleteComment(Long commentId) {
+        commentRepository.deleteById(commentId);
+    }
 }
 

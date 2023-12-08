@@ -13,6 +13,12 @@
     <!-- Визуализация на коментарите -->
     <div th:each="comment : ${comments}">
         <p th:text="${comment.content}"></p>
+        <div th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+            <!-- Бутон за изтриване на коментара -->
+            <form th:method="delete" th:action="@{/comments/delete/{commentId}(commentId=${comment.id})}">
+                <input type="submit" value="Изтрий коментар" class="btn btn-danger btn-sm"/>
+            </form>
+        </div>
     </div>
 </div>
 
