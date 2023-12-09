@@ -597,6 +597,8 @@ form.main-form {
 /*    background-color: #0833e3*/
 /*}*/
 
-.picture {
-
+@media (max-width: 768px) {
+    .navbar {
+        display: none;
+    }
 }
