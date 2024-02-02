@@ -117,6 +117,7 @@ body {
 
 .about h3 {
     padding: 10px;
+    font-size: 1.90rem;
 }
 
 .about_text, .a-class{
@@ -124,6 +125,10 @@ body {
     color:rgb(5, 28, 15);
    font-weight: bolder;
     /*font-weight: bold;*/
+}
+
+.thank {
+    font-size:  1.35rem;
 }
 
 .fun-about {
