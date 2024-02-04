@@ -21,11 +21,27 @@ body {
     background-color: #464646;
 }
 
+.main, .section{
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.place-in-category {
+    display: inline-block;
+    grid-gap: 20px;
+    max-width: fit-content;
+    padding-bottom: 20px;
+}
+
 .showcase a h2{
     color: #6CAC6E;
     text-align: right;
     /*margin-left: 80px;*/
     /*margin-top: 200px;*/
+}
+.image-style {
+    border-radius: 5px;
+    padding-bottom: 10px;
 }
 
 
@@ -129,11 +145,15 @@ body {
 
 .thank {
     font-size:  1.35rem;
+    color: greenyellow;
 }
 
 .fun-about {
     font-weight: lighter;
     color: #d0e3d5;
+}
+.to-main-menu{
+    color: #124C42;
 }
 
 .change {

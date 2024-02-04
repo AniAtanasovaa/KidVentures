@@ -7,34 +7,34 @@
 </head>
 
 <body>
-<div>
+<header>
     <nav th:replace="~{fragments/navbar}"></nav>
-</div>
-<p></p>
-<br>
-<p></p>
-<br>
-<h2 class="text-center text-white">Всички места в категория: <span th:text="${categoryName}"></span></h2>
-<section class="boxes">
-    <div th:each="place : ${placesInCategory}">
-        <div class="box">
-            <h3 th:text="${place.name}"></h3>
-            <p th:text="${place.description}"></p>
-            <p th:text="${place.city}"></p>
-            <p th:text="${place.address}"></p>
-            <div style="text-align: center">
-                <img style="height: 200px; width: 200px" th:if="${place.picture != null}" th:src="${place.picture.url}" alt="test image">
-            </div>
-        </div>
-    </div>
+</header>
 
-    <div class="text-center">
-        <br>
-        <a href="/" class="fun-about"><h2>Заповядайте в основното меню...</h2></a>
-    </div>
+<main class="main">
+
+
+<h2 class="text-center text-white">Всички места в категория: <span th:text="${categoryName}"></span></h2>
+<section class="boxes place-in-category">
+    <article th:each="place : ${placesInCategory}">
+        <section class="box">
+            <h3 class="text-white"  th:text="${place.name}"></h3>
+            <p class="text-white" th:text="${place.description}"></p>
+            <p class="text-white" th:text="${place.city}"></p>
+            <p class="text-white" th:text="${place.address}"></p>
+            <div style="text-align: center" class="picture-in-category">
+                <img class="image-style" style="height: 100px; width: 100px" th:if="${place.picture != null}" th:src="${place.picture.url}" alt="test image">
+            </div>
+        </section>
+    </article>
+
 </section>
 
+</main>
 
+<section class="text-center section">
+    <a href="/" class="to-main-menu"><h2>Заповядайте в основното меню...</h2></a>
+</section>
 
 </body>
 
