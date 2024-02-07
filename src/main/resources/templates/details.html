@@ -65,7 +65,7 @@
 </header>
 <div class="container">
     <div th:object="${place}" class="main-form mx-auto col-md-8 my-3 d-flex flex-column " data-place-id="${place.id}">
-        <div class="box mb-3">
+        <div class="box mb-3 bold">
             <div th:text="${place.getSummary()}" style="white-space: pre-line;"> </div>
 
             <img style="height: 300px; width: 300px" th:src="${imageURL}" alt="Снимка" class="pic-details">
@@ -96,7 +96,7 @@
     </div>
 
     <div class="text-center">
-        <a href="/" class="fun-about"><h2>Заповядайте в основното меню...</h2></a>
+        <a href="/" class="a-class"><h2>Заповядайте в основното меню...</h2></a>
     </div>
 </div>
 
