@@ -28,8 +28,8 @@
 
             <div th:text="${place.getSummary}" style="white-space: pre-line;"></div>
 
-            <div>
-                <a class="a-class" th:href="@{/place/{id}(id=${place.id})}">Допълнителна информация...</a>
+            <div class="more-info">
+                <a class="a-class " th:href="@{/place/{id}(id=${place.id})}">Допълнителна информация...</a>
             </div>
         </div>
 
