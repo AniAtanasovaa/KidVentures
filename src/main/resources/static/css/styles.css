@@ -45,6 +45,9 @@ body {
     padding: 10px;
 
 }
+.pic-index {
+    padding-bottom: 10px;
+}
 
 
  h3 {
@@ -74,6 +77,18 @@ body {
     transition: transform 0.3s;
 }
 
+.fun-about:hover{
+    transform: scale(1.3);
+    transition: transform 0.3s;
+
+}
+.nav-item:hover{
+    transform: scale(1.3);
+    transition: transform 0.3s;
+}
+
+
+
 .navbar-nav .nav-link {
     color: #d0e3d5;
     display: block;
@@ -99,6 +114,7 @@ body {
     position: fixed;
     bottom: 0;
     width: 100%;
+    margin-top: 0;
 }
 
 /*footer {*/
@@ -157,6 +173,7 @@ body {
 .fun-about {
     font-weight: lighter;
     color: #d0e3d5;
+    padding-left: 50px;
 }
 .to-main-menu{
     color: #124C42;
@@ -336,7 +353,7 @@ form.main-form {
 /* Top Container */
 .top-container {
     display: grid;
-    grid-gap: 20px;
+    grid-gap: 5px;
     grid-template-areas:
     'showcase showcase top-box-a'
     'showcase showcase top-box-b';
@@ -345,7 +362,7 @@ form.main-form {
 /*!* Showcase *!*/
 .showcase {
     grid-area: showcase;
-    min-height: 400px;
+    min-height: 250px;
     background: url('/static/images/lulka.jpg');
     background-size: cover;
     background-position: center;
@@ -395,9 +412,7 @@ form.main-form {
 .boxes {
     display: grid;
     grid-gap: 20%;
-    padding-right: 5%;
-    padding-left: 5%;
-    padding-top: 3%;
+    padding: 3% 5% 5%;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 
