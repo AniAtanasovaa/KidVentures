@@ -8,7 +8,61 @@
 
 <body>
 <header>
-    <nav th:replace="~{fragments/navbar}"></nav>
+    <div>
+        <nav class="navbar navbar-expand-lg rounded nav-details">
+
+            <ul class="navbar-nav mr-auto col-12 justify-content-between">
+
+                <li class="nav-item"><a class="nav-link" href="/">Начало</a></li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/about">За нас</a></li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/places/all">Виж всички места</a>
+                </li>
+
+                <li class="nav-item" sec:authorize="!isAuthenticated()">
+                    <a class="nav-link" href="/register">Регистрация</a></li>
+
+
+                <li class="nav-item" sec:authorize="!isAuthenticated()">
+                    <a class="nav-link" href="/login">Вход</a>
+                </li>
+
+
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link" href="/place/add">Добави място</a>
+                </li>
+
+
+                <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+                    <a class="nav-link" href="/change">Смяна на ролята</a>
+                </li>
+
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <div class="nav-link">Привет,
+                        <th:block sec:authentication="name"></th:block>
+                        !
+                    </div>
+
+                </li>
+
+
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link" href="/logout">
+                        <form th:method="post"
+                              th:action="@{/logout}">
+                            <input class="logout" type="submit" value="Изход"/>
+                        </form>
+                    </a>
+
+                </li>
+
+
+            </ul>
+        </nav>
+    </div>
 </header>
 
 <main class="main">
@@ -23,8 +77,9 @@
             <p class="text-white" th:text="${place.city}"></p>
             <p class="text-white" th:text="${place.address}"></p>
             <div style="text-align: center" class="picture-in-category">
-                <img class="image-style" style="height: 100px; width: 100px" th:if="${place.picture != null}" th:src="${place.picture.url}" alt="test image">
+                <img class="image-style image-category" style="height: 250px; width: 250px" th:if="${place.picture != null}" th:src="${place.picture.url}" alt="test image">
             </div>
+
         </section>
     </article>
 

@@ -79,16 +79,15 @@
             </div>
 
             <div class="form-group col-md-6 mb-3">
-                <label for="category" class="text-white font-weight-bold">Категория</label>
+                <label for="category" class="text-white font-weight-bold">Изберете категория</label>
                 <select th:field="*{category}"
                          id="category"
                         name="category"
                         th:errorclass="is-invalid">
-                    <option value="" selected>Изберете категория</option>
                     <option th:each="category : ${T(defence.app.model.enums.CategoryEnum).values()}"
                             th:text="${category}"
                             th:value="${category}"
-                            th:selected="${category} == *{category}">Изберете категория</option>
+                            th:selected="${category} == *{category}"></option>
                 </select>
 
                 <p class="invalid-feedback errors alert alert-danger">
@@ -97,7 +96,7 @@
             </div>
 
 
-            <div class="form-group col-md-6 mb-3 picture mx-auto">
+            <div class="form-group mb-3 picture mx-auto">
                 <label for="image" class="text-white font-weight-bold">Снимка</label>
                 <input type="file"
                        id="image"

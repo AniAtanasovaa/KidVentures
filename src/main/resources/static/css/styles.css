@@ -33,15 +33,17 @@ body {
     padding-bottom: 20px;
 }
 
+
 .showcase a h2{
     color: #6CAC6E;
     text-align: right;
     /*margin-left: 80px;*/
     /*margin-top: 200px;*/
 }
-.image-style {
-    border-radius: 5px;
-    padding-bottom: 10px;
+.image-style,  .pic-details, .image-category, .picture-in-category{
+    border-radius: 10px;
+    padding: 10px;
+
 }
 
 
@@ -82,6 +84,9 @@ body {
     /*text-transform: uppercase;*/
     font-size: 1.1rem;
     box-shadow: var(--shadow);
+}
+.nav-details {
+    display: block;
 }
 
 .footer {
@@ -147,6 +152,7 @@ body {
     font-size:  1.35rem;
     color: greenyellow;
 }
+
 
 .fun-about {
     font-weight: lighter;
