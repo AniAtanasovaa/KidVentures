@@ -58,7 +58,7 @@ body {
 .navbar {
     display: inline-block;
     grid-gap: 20px;
-    padding-right: 100px;
+    /*padding-right: 100px;*/
     /*background-color: #A6D2A8;*/
 }
 
