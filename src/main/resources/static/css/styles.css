@@ -121,7 +121,7 @@ h3 {
     grid-gap: 20px;
     list-style: none;
     text-align: center;
-    position: fixed;
+    /*position: fixed;*/
     bottom: 0;
     width: 100%;
     margin-top: 0;
@@ -750,24 +750,11 @@ nav ul li ul li a:hover {
         text-align: center;
     }
 
-    .fixed-top {
-        position: relative;
-    }
-    .about {
-        top:35%;
-        padding: 20px;
-        font-size: 10px;
-    }
-
-    .footer {
-        display: block;
-        /*position: sticky;*/
-
-    }
     .navbar{
         text-align: center;
         padding: 5px;
     }
+
     .navbar ul {
         display: inline-block;
         grid-gap: 0px;
@@ -779,6 +766,26 @@ nav ul li ul li a:hover {
         padding: 3% 5% 5%;
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     }
+
+    .fixed-top {
+        position: relative;
+    }
+
+    .about {
+        display: block;
+        top:35%;
+        padding: 20px;
+        font-size: 10px;
+    }
+
+    .footer {
+        display: block;
+        position: sticky;
+
+    }
+
+
+
 
 
 
