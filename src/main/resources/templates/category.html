@@ -68,7 +68,7 @@
 <main class="main">
 
 
-<h2 class="text-center text-white">Всички места в категория: <span th:text="${categoryName}"></span></h2>
+<h2 class="text-center text-white">Всички места в категория: <span class="change-color" th:text="${categoryName}"></span></h2>
 <section class="boxes place-in-category">
     <article th:each="place : ${placesInCategory}">
         <section class="box">
