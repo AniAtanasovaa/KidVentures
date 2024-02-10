@@ -50,7 +50,7 @@ body {
 }
 
 
- h3 {
+h3 {
     text-decoration: none;
     color: #124C42;
 }
@@ -138,10 +138,11 @@ body {
 
 .container, .container-fluid {
     padding-top: 4%;
-   }
+}
 
 .container-add {
-    padding-top: 90px;
+    padding-top: 6%;
+    padding-bottom: 10%;
 
 }
 
@@ -153,7 +154,7 @@ body {
 
 .about {
     position: absolute;
-    top: 50%;
+    top: 55%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-image: linear-gradient(to bottom right, rgba(156, 204, 101, 0.8), rgba(10, 10, 10, 0.8));
@@ -183,7 +184,7 @@ body {
 .about_text{
     font-size:  1.05rem;
     color:rgb(5, 28, 15);
-   font-weight: bolder;
+    font-weight: bolder;
     padding-top: 10px;
 
     /*font-weight: bold;*/
@@ -191,12 +192,12 @@ body {
 
 .a-class{
     font-size: 12px;
-      color:wheat;
-      font-weight: bolder;
-      padding-top: 10px;
+    color:wheat;
+    font-weight: bolder;
+    padding-top: 10px;
 
-      /*font-weight: bold;*/
-  }
+    /*font-weight: bold;*/
+}
 
 .change-color {
     color: #16d942;
@@ -232,7 +233,7 @@ body {
 }
 
 .change {
-    margin-top: 50px;
+    margin-top: 10%;
 }
 
 .button-delete {
@@ -253,9 +254,9 @@ body {
     padding: 20px;
     text-align: center;
 }
- p {
-     color: wheat;
- }
+p {
+    color: wheat;
+}
 
 
 /*.dog-img:hover{*/
@@ -328,6 +329,21 @@ form.main-form {
 .logout:hover{
     transform: scale(1.2);
     transition: transform 0.3s;
+}
+
+.sub-a {
+    border-radius: 12px;
+    ackground-color: rgba(129, 151, 102, 0.5);
+    text-align: center;
+    padding: 2px;
+    box-shadow: var(--shadow);
+    border: none;
+    color: #0b2e13;
+}
+
+
+.text-center {
+    margin-top: 3%;
 }
 
 
@@ -418,11 +434,11 @@ form.main-form {
 /*!* Showcase *!*/
 .showcase {
     grid-area: showcase;
-    min-height: 250px;
+    /*min-height: 250px;*/
     background: url('/static/images/lulka.jpg');
     background-size: cover;
     background-position: center;
-    padding: 3rem;
+    padding: 2rem;
     display: flex;
     flex-direction: column;
     align-items: start;
@@ -468,7 +484,7 @@ form.main-form {
 .boxes {
     display: grid;
     grid-gap: 20%;
-    padding: 3% 5% 5%;
+    padding: 3% 5% 3%;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 
@@ -699,6 +715,34 @@ form.main-form {
 /*    background-color: #0833e3*/
 /*}*/
 
+/*
+/* Drop-down menu {
+ */
+
+nav ul li ul {
+    display: none;
+    position: absolute;
+}
+
+nav ul li:hover ul {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+/*nav ul li ul li a {*/
+/*    display: block;*/
+/*    padding: 10px 20px;*/
+/*    text-decoration: none;*/
+/*    color: #333;*/
+/*    transition: background-color 0.3s;*/
+/*}*/
+
+nav ul li ul li a:hover {
+    color: #f0f0f0;
+    text-decoration: none;
+}
+
+.
 @media (max-width: 768px) {
 
     body {
@@ -706,8 +750,8 @@ form.main-form {
         text-align: center;
     }
 
-   .fixed-top {
-      position: relative;
+    .fixed-top {
+        position: relative;
     }
     .about {
         top:35%;
@@ -716,8 +760,8 @@ form.main-form {
     }
 
     .footer {
-       display: block;
-        position: sticky;
+        display: block;
+        /*position: sticky;*/
 
     }
     .navbar{
@@ -725,9 +769,9 @@ form.main-form {
         padding: 5px;
     }
     .navbar ul {
-display: inline-block;
-grid-gap: 0px;
-}
+        display: inline-block;
+        grid-gap: 0px;
+    }
 
     .boxes {
         display: grid;

@@ -20,6 +20,12 @@
 
                 <li class="nav-item">
                     <a class="nav-link" href="/places/all">Виж всички места</a>
+                    <ul class="sub-menu">
+                        <li class="sub-li"> <a th:href="@{/categories/ВЪТРЕ}" class="sub-a">Вътре</a></li>
+                        <li class="sub-li"> <a th:href="@{/categories/НАВЪН}" class="sub-a">Навън</a></li>
+                        <li class="sub-li"><a th:href="@{/categories/ЖИВОТНИ}" class="sub-a">Животни</a></li>
+
+                    </ul>
                 </li>
 
                 <li class="nav-item" sec:authorize="!isAuthenticated()">
