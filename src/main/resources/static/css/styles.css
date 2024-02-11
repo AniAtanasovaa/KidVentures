@@ -21,6 +21,7 @@ body {
     background-color: #464646;
 }
 
+
 .main, .section{
     margin-top: 5%;
     margin-bottom: 5%;
@@ -116,7 +117,7 @@ h3 {
 
 .footer {
     /*background-color: #3D6440;*/
-    color: #021e19;
+    color: #011e08;
     padding: 5px;
     grid-gap: 20px;
     list-style: none;
@@ -125,6 +126,11 @@ h3 {
     bottom: 0;
     width: 100%;
     margin-top: 0;
+}
+
+.footer-change{
+   margin-top: 100px;
+
 }
 
 /*footer {*/
@@ -141,7 +147,7 @@ h3 {
 }
 
 .container-add {
-    padding-top: 6%;
+    /*padding-top: 6%;*/
     padding-bottom: 10%;
 
 }
@@ -154,7 +160,7 @@ h3 {
 
 .about {
     position: absolute;
-    top: 55%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-image: linear-gradient(to bottom right, rgba(156, 204, 101, 0.8), rgba(10, 10, 10, 0.8));
@@ -233,7 +239,7 @@ h3 {
 }
 
 .change {
-    margin-top: 10%;
+    margin-top: 5%;
 }
 
 .button-delete {
@@ -483,7 +489,7 @@ form.main-form {
 /* Boxes */
 .boxes {
     display: grid;
-    grid-gap: 20%;
+    grid-gap: 5%;
     padding: 3% 5% 3%;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
@@ -742,7 +748,6 @@ nav ul li ul li a:hover {
     text-decoration: none;
 }
 
-.
 @media (max-width: 768px) {
 
     body {
@@ -761,10 +766,12 @@ nav ul li ul li a:hover {
     }
 
     .boxes {
-        display: grid;
-        grid-gap: 2%;
-        padding: 3% 5% 5%;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        display: flex;
+        flex-direction: column;
+       flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 10px ;
+
     }
 
     .fixed-top {
@@ -784,9 +791,21 @@ nav ul li ul li a:hover {
 
     }
 
+    nav ul li ul li {
+        display: none;
+        position: absolute;
+    }
 
+    nav ul li:hover ul {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        position: static;
+    }
 
-
+    nav ul li ul li a:hover {
+        color: #f0f0f0;
+        text-decoration: none;
+    }
 
 
 
