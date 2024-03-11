@@ -2,68 +2,70 @@
 // В случай на успешно зареждане на коментарите, те се вмъкват в контейнера с id 'comments-container'. Също така,
 // се показва формата за добавяне на коментар. В случай на грешка при заявката, се извежда грешката в конзолата.
 
-//Todo !!! да направя кометарите с DOM (курс JS Front-End - февруари 2023 лекция DOM and Events 14.03) да е със списък или таблица -
-// папка Неща за интервю -> папка JS Front End -> JS -> DOM / или с React
-async function loadCommentsForPlace(placeId) {
-    $.ajax({
-        type: 'GET',
-        url: '/comments/place/' + placeId,
-        success: function(data) {
-            $('#comments-container').html(data);
-            // Показвам формата за добавяне на коментар
-            $('form').show();
-        },
-        error: function(error) {
-            console.error('Error loading comments:', error);
-        }
-    });
-}
+const PLACE_ID =
+    document.querySelector('[data-place-id]').getAttribute('data-place-id');
+
+const RESULT_CONTAINER = document.getElementById('commentsFragment');
+
+RESULT_CONTAINER.textContent = '';
+function loadCommentsForPlace(placeId) {
+
+    fetch('/comments/place/' + placeId, {method: 'GET'})
+        .then((resultJson) => resultJson.json())
+        .then((result) =>{
+RESULT_CONTAINER.textContent = result;
+            })
+        .catch((err) => console.log(err))
+    };
 
 // Обработка за бутона за зареждане на коментарите: активира се при клик върху елемент с id 'load-comments-btn'
 // Получава placeId от атрибута 'data-place-id' на кликнатия елемент и след това се извиква loadCommentsForPlace(placeId).
-$('#load-comments-btn').on('click', function () {
-    const placeId = $(this).data('place-id');
-    console.log("Loading comments for place ID:", placeId);
-    loadCommentsForPlace(placeId);
-});
+
+const loadCommentsBtn = document.getElementById('load-comments-btn');
+loadCommentsBtn.addEventListener("click", clickMe);
 
 // Изпълнение на заявката при зареждане на страницата. Този фрагмент се изпълнява при зареждане на страницата
 // Получава placeId от атрибута 'data-place-id' на някой елемент и след това извиква loadCommentsForPlace(placeId).
-$(document).ready(function() {
-    const placeId = document.querySelector('[data-place-id]').getAttribute('data-place-id');
-    loadCommentsForPlace(placeId);
-});
+
+function clickMe (e){
+    loadCommentsForPlace(PLACE_ID);
+}
 
 // съхранение на URL на изображението в #comments-container, използвайки jQuery data метод.
-$('#comments-container').data('image-url', $('[data-place-id]').find('img').attr('src'));
+// $('#comments-container').data('image-url', $('[data-place-id]').find('img').attr('src'));
 
 // Изпълнение на заявката при добавяне на коментар. Този обработчик се изпълнява при подаване на submit
 // Използва fetch за изпращане на POST заявка към '/comments/place/' + placeId със съдържанието на формата.
 // След успешно добавяне на коментар, се извиква loadCommentsForPlace(placeId) за да се заредят отново коментарите.
-$('form').submit(async function(e) {
-    e.preventDefault();
-    const placeId = this.closest('[data-place-id]').getAttribute('data-place-id');
-    console.log('Adding comment...');
-    await fetch('/comments/place/' + placeId, {
+
+const submitCommentBtn = document.getElementById('submit-comment-btn');
+submitCommentBtn.addEventListener("submit", submitComment);
+
+function submitComment(e){
+
+    fetch('/comments/place/' + PLACE_ID, {
         method: 'POST',
         headers: {
             'Accept': 'text/html',
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: new URLSearchParams(new FormData(this)).toString(),
-    });
+            'Content-Type': 'application/json/x-www-form-urlencoded',
+            body: JSON.stringify(data), ///TODO????
 
-    // След като добавим коментар, зареждаме отново коментарите
-    console.log('Comment added. Loading comments...');
-    loadCommentsForPlace(placeId);
-});
+        }
+    }).then((resultJson) => resultJson.json())
+        .then((result) =>{
+            RESULT_CONTAINER.textContent = result;
+        })
+        .catch((err) => console.log(err))
+
+};
+
 
 // Обработчик за бутона за добавяне на коментар - изпълнява се при клик върху елемента с id 'add-comment-btn' и
 // показва формата за добавяне на коментар.
-$('#add-comment-btn').on('click', function () {
-    // Показвам формата за добавяне на коментар
-    $('form').show();
-});
+// $('#add-comment-btn').on('click', function () {
+//     // Показвам формата за добавяне на коментар
+//     $('form').show();
+// });
 
 //jQuery е библиотека за JavaScript, която се използва за облекчаване на работата с DOM (Document Object Model),
 // анимации, обработка на събития и изпращане на асинхронни заявки към сървъри. Тя предоставя прост и удобен
@@ -71,7 +73,8 @@ $('#add-comment-btn').on('click', function () {
 // Основните функционалности на jQuery: 1/ DOM манипулации: jQuery предоставя лесни методи за манипулиране на HTML
 // елементите и тяхната структура в DOM. 2/ Събития: Улеснява добавянето на обработчици на събития, като клик,
 // изглеждане,клавишни комбинации и други. 3/ Анимации: jQuery предоставя методи за изпълнение на анимации като скриване,
-// показване, изглеждане и др. AJAX заявки: Улеснява изпращането на асинхронни HTTP заявки към сървъри и обработката на
+// показване, изглеждане и др.
+// AJAX заявки: Улеснява изпращането на асинхронни HTTP заявки към сървъри и обработката на
 // получените данни.
 
 

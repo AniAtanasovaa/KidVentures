@@ -11,7 +11,7 @@
 
 <div id="commentsFragment" th:fragment="commentsFragment">
     <!-- Визуализация на коментарите -->
-    <div th:each="comment : ${comments}">
+    <div id="comment-iter" th:each="comment : ${comments}">
         <p th:text="${comment.content}"></p>
         <div th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
             <!-- Бутон за изтриване на коментара -->

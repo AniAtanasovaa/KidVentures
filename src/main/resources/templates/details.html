@@ -80,7 +80,11 @@
     </div>
 
     <div class="text-center mb-3"> <!-- Бутон за зареждане на коментарите -->
-        <a th:href="@{/comments/place/{placeId}(placeId=${place.id})}" class="btn btn-info btn-lg">Зареди коментарите</a>
+        <button id="load-comments-btn" class="btn btn-info btn-lg" >
+            <a th:href="@{/comments/place/{placeId}(placeId=${place.id})}" class="btn btn-info btn-lg">Зареди коментарите</a>
+        </button>
+
+
     </div>
 
     <!-- Форма за добавяне на коментар -->
@@ -90,7 +94,7 @@
         <label for="comment">Коментар:</label>
         <textarea id="comment" name="content" class="font-weight-bold form-control mb-2"></textarea>
 
-        <button type="submit" class="btn btn-primary">Добави коментар</button>
+        <button type="submit" class="btn btn-primary" id="submit-comment-btn">Добави коментар</button>
     </form>
 
     <div class="text-center mb-3" sec:authorize="hasRole('ADMIN')">
