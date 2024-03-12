@@ -7,6 +7,8 @@ const PLACE_ID =
 
 const RESULT_CONTAINER = document.getElementById('commentsFragment');
 
+// const CONTAINER_COMMENT_AUTHOR_USERNAME = document.getElementById('commentAuthorUsername');
+
 RESULT_CONTAINER.textContent = '';
 function loadCommentsForPlace(placeId) {
 
@@ -16,7 +18,7 @@ function loadCommentsForPlace(placeId) {
 RESULT_CONTAINER.textContent = result;
             })
         .catch((err) => console.log(err))
-    };
+    }
 
 // Обработка за бутона за зареждане на коментарите: активира се при клик върху елемент с id 'load-comments-btn'
 // Получава placeId от атрибута 'data-place-id' на кликнатия елемент и след това се извиква loadCommentsForPlace(placeId).
@@ -27,7 +29,7 @@ loadCommentsBtn.addEventListener("click", clickMe);
 // Изпълнение на заявката при зареждане на страницата. Този фрагмент се изпълнява при зареждане на страницата
 // Получава placeId от атрибута 'data-place-id' на някой елемент и след това извиква loadCommentsForPlace(placeId).
 
-function clickMe (e){
+function clickMe (){
     loadCommentsForPlace(PLACE_ID);
 }
 
@@ -41,7 +43,7 @@ function clickMe (e){
 const submitCommentBtn = document.getElementById('submit-comment-btn');
 submitCommentBtn.addEventListener("submit", submitComment);
 
-function submitComment(e){
+function submitComment(){
 
     fetch('/comments/place/' + PLACE_ID, {
         method: 'POST',
@@ -57,7 +59,7 @@ function submitComment(e){
         })
         .catch((err) => console.log(err))
 
-};
+}
 
 
 // Обработчик за бутона за добавяне на коментар - изпълнява се при клик върху елемента с id 'add-comment-btn' и
